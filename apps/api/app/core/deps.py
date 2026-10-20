@@ -58,7 +58,7 @@ def require(*roles: UserRole) -> Any:
             )
         return user
 
-    return Depends(_dependency)
+    return _dependency
 
 
 async def user_region_ids(db: AsyncSession, user: User) -> Sequence[uuid.UUID] | None:

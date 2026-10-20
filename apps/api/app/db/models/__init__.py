@@ -2,6 +2,24 @@
 autogenerate and for `Base.metadata.create_all` in tests.
 """
 
-from app.db.models import audit, geo, institution, otp, outbox, user  # noqa: F401
+from app.db.models import (  # noqa: F401
+    audit,
+    deadline,
+    geo,
+    institution,
+    otp,
+    outbox,
+    user,
+    workflow,
+)
 
-__all__ = ["audit", "geo", "institution", "otp", "outbox", "user"]
+__all__ = [
+    "audit",
+    "deadline",
+    "geo",
+    "institution",
+    "otp",
+    "outbox",
+    "user",
+    "workflow",
+]
