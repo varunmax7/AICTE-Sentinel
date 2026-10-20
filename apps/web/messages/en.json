@@ -1,0 +1,117 @@
+{
+  "common": {
+    "appName": "AICTE Sentinel",
+    "appFullName": "Approval & Compliance Portal",
+    "loading": "Loading…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "close": "Close",
+    "search": "Search App ID, Institution, Faculty ID…",
+    "language": "Language",
+    "theme": "Theme",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "themeSystem": "System",
+    "comingSoon": "This screen is built in a later phase.",
+    "version": "v0.1.0-dev"
+  },
+  "auth": {
+    "title": "Sign in",
+    "subtitle": "AICTE Approval & Compliance Portal",
+    "roleLabel": "I am signing in as",
+    "identifierLabel": "Registered mobile number",
+    "identifierPlaceholder": "+91XXXXXXXXXX",
+    "sendOtp": "Send OTP",
+    "otpLabel": "One-Time Password",
+    "otpPlaceholder": "6-digit code",
+    "verifyAndLogin": "Verify & Sign in",
+    "changeNumber": "Change number",
+    "resendOtp": "Resend OTP",
+    "demoNotice": "Demo mode: use OTP 123456",
+    "otpSentTo": "OTP sent to {identifier}",
+    "roles": {
+      "INSTITUTION": "Institution Staff",
+      "SCRUTINY_OFFICER": "Scrutiny Officer",
+      "REGIONAL_OFFICER": "Regional Officer",
+      "BUREAU_HEAD": "Bureau Head",
+      "COMMITTEE_MEMBER": "Committee Member",
+      "EVC_EXPERT": "EVC Expert",
+      "ADMIN": "Administrator"
+    },
+    "errors": {
+      "ACCOUNT_NOT_FOUND": "No account found for this number and role.",
+      "INVALID_OTP": "That code is incorrect. Please try again.",
+      "ROLE_NOT_LOGINABLE": "This role does not sign in here.",
+      "RATE_LIMITED": "Too many attempts. Please wait before trying again.",
+      "TOO_MANY_ATTEMPTS": "Too many incorrect attempts. Please request a new OTP.",
+      "OTP_NOT_REQUESTED": "Please request an OTP first.",
+      "GENERIC": "Something went wrong. Please try again."
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "queue": "Queue",
+    "applications": "Applications",
+    "compliance": "Compliance",
+    "documentVault": "Document Vault",
+    "analytics": "Analytics",
+    "settings": "Settings",
+    "escalations": "Escalations",
+    "evc": "EVC",
+    "pendency": "Pendency",
+    "workload": "Workload",
+    "reports": "Reports",
+    "meetings": "Meetings",
+    "workflow": "Workflow",
+    "escalationPolicies": "Escalation Policies",
+    "templates": "Templates",
+    "voice": "Voice",
+    "masterData": "Master Data",
+    "audit": "Audit",
+    "health": "System Health",
+    "communications": "Communications",
+    "approvals": "Approvals",
+    "visits": "Visits"
+  },
+  "status": {
+    "DRAFT": "Draft",
+    "SUBMITTED": "Submitted",
+    "IN_PROCESS": "In Process",
+    "DECISION_RECORDED": "Decision Recorded",
+    "APPROVED": "Approved",
+    "APPROVED_WITH_CONDITIONS": "Approved with Conditions",
+    "REJECTED": "Rejected",
+    "WITHDRAWN": "Withdrawn",
+    "PENDING": "Pending",
+    "ACTIVE": "Active",
+    "COMPLETED": "Completed",
+    "RETURNED": "Returned",
+    "REFERRED": "Referred",
+    "SKIPPED": "Skipped"
+  },
+  "sla": {
+    "onTime": "{days} Days Left (On-Time)",
+    "dueSoon": "{days} Days Left (Due Soon)",
+    "overdue": "{days} Days Overdue"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "empty": "No notifications yet.",
+    "liveConnected": "Live",
+    "liveDisconnected": "Reconnecting…",
+    "markAllRead": "Mark all read"
+  },
+  "settings": {
+    "title": "Settings",
+    "profile": "Profile",
+    "name": "Name",
+    "language": "Preferred language",
+    "theme": "Theme",
+    "saved": "Saved."
+  },
+  "roleHome": {
+    "greeting": "Welcome, {name}",
+    "role": "Role: {role}"
+  }
+}

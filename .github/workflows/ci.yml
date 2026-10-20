@@ -45,12 +45,45 @@ jobs:
     strategy:
       matrix:
         app: [api, voice]
+    # apps/api's tests hit a real Postgres + Redis (auth/OTP flow, audit
+    # chain, demo clock) — see docs/DECISIONS.md. apps/voice doesn't need
+    # either yet; the services are harmless unused overhead for that leg.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: acp
+          POSTGRES_PASSWORD: acp
+          POSTGRES_DB: acp
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U acp -d acp"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql+asyncpg://acp:acp@localhost:5432/acp
+      REDIS_URL: redis://localhost:6379/0
     steps:
       - uses: actions/checkout@v4
 
       - uses: astral-sh/setup-uv@v4
         with:
           version: "0.12.4"
+
+      - name: Enable pgcrypto extension
+        if: matrix.app == 'api'
+        run: psql "postgresql://acp:acp@localhost:5432/acp" -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
+        env:
+          PGPASSWORD: acp
 
       - name: Install dependencies
         working-directory: apps/${{ matrix.app }}

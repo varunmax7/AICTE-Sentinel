@@ -1,0 +1,117 @@
+{
+  "common": {
+    "appName": "AICTE ಸೆಂಟಿನೆಲ್",
+    "appFullName": "ಅನುಮೋದನೆ ಮತ್ತು ಅನುಸರಣೆ ಪೋರ್ಟಲ್",
+    "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ…",
+    "save": "ಉಳಿಸಿ",
+    "cancel": "ರದ್ದುಮಾಡಿ",
+    "submit": "ಸಲ್ಲಿಸಿ",
+    "close": "ಮುಚ್ಚಿ",
+    "search": "App ID, ಸಂಸ್ಥೆ, Faculty ID ಹುಡುಕಿ…",
+    "language": "ಭಾಷೆ",
+    "theme": "ಥೀಮ್",
+    "themeLight": "ಲೈಟ್",
+    "themeDark": "ಡಾರ್ಕ್",
+    "themeSystem": "ಸಿಸ್ಟಮ್",
+    "comingSoon": "ಈ ಸ್ಕ್ರೀನ್ ಮುಂದಿನ ಹಂತದಲ್ಲಿ ನಿರ್ಮಿಸಲಾಗುತ್ತದೆ.",
+    "version": "v0.1.0-dev"
+  },
+  "auth": {
+    "title": "ಸೈನ್ ಇನ್ ಮಾಡಿ",
+    "subtitle": "AICTE ಅನುಮೋದನೆ ಮತ್ತು ಅನುಸರಣೆ ಪೋರ್ಟಲ್",
+    "roleLabel": "ನಾನು ಈ ಪಾತ್ರವಾಗಿ ಸೈನ್ ಇನ್ ಆಗುತ್ತಿದ್ದೇನೆ",
+    "identifierLabel": "ನೋಂದಾಯಿತ ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
+    "identifierPlaceholder": "+91XXXXXXXXXX",
+    "sendOtp": "OTP ಕಳುಹಿಸಿ",
+    "otpLabel": "ಒನ್-ಟೈಮ್ ಪಾಸ್‌ವರ್ಡ್",
+    "otpPlaceholder": "6-ಅಂಕಿಯ ಕೋಡ್",
+    "verifyAndLogin": "ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಸೈನ್ ಇನ್ ಮಾಡಿ",
+    "changeNumber": "ಸಂಖ್ಯೆಯನ್ನು ಬದಲಾಯಿಸಿ",
+    "resendOtp": "OTP ಮರುಕಳುಹಿಸಿ",
+    "demoNotice": "ಡೆಮೊ ಮೋಡ್: OTP 123456 ಬಳಸಿ",
+    "otpSentTo": "{identifier} ಗೆ OTP ಕಳುಹಿಸಲಾಗಿದೆ",
+    "roles": {
+      "INSTITUTION": "ಸಂಸ್ಥೆ ಸಿಬ್ಬಂದಿ",
+      "SCRUTINY_OFFICER": "ಪರಿಶೋಧನಾ ಅಧಿಕಾರಿ",
+      "REGIONAL_OFFICER": "ಪ್ರಾದೇಶಿಕ ಅಧಿಕಾರಿ",
+      "BUREAU_HEAD": "ಬ್ಯೂರೋ ಮುಖ್ಯಸ್ಥ",
+      "COMMITTEE_MEMBER": "ಸಮಿತಿ ಸದಸ್ಯ",
+      "EVC_EXPERT": "EVC ತಜ್ಞ",
+      "ADMIN": "ನಿರ್ವಾಹಕ"
+    },
+    "errors": {
+      "ACCOUNT_NOT_FOUND": "ಈ ಸಂಖ್ಯೆ ಮತ್ತು ಪಾತ್ರಕ್ಕೆ ಖಾತೆ ಕಂಡುಬಂದಿಲ್ಲ.",
+      "INVALID_OTP": "ಈ ಕೋಡ್ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+      "ROLE_NOT_LOGINABLE": "ಈ ಪಾತ್ರ ಇಲ್ಲಿ ಸೈನ್ ಇನ್ ಆಗುವುದಿಲ್ಲ.",
+      "RATE_LIMITED": "ಹಲವು ಪ್ರಯತ್ನಗಳು. ದಯವಿಟ್ಟು ಸ್ವಲ್ಪ ಸಮಯ ಕಾದು ಪ್ರಯತ್ನಿಸಿ.",
+      "TOO_MANY_ATTEMPTS": "ಹಲವು ತಪ್ಪು ಪ್ರಯತ್ನಗಳು. ಹೊಸ OTP ಕೋರಿ.",
+      "OTP_NOT_REQUESTED": "ದಯವಿಟ್ಟು ಮೊದಲು OTP ಕೋರಿ.",
+      "GENERIC": "ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+    }
+  },
+  "nav": {
+    "dashboard": "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
+    "queue": "ಸರತಿ",
+    "applications": "ಅರ್ಜಿಗಳು",
+    "compliance": "ಅನುಸರಣೆ",
+    "documentVault": "ಡಾಕ್ಯುಮೆಂಟ್ ವಾಲ್ಟ್",
+    "analytics": "ವಿಶ್ಲೇಷಣೆ",
+    "settings": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "escalations": "ಎಸ್ಕಲೇಶನ್‌ಗಳು",
+    "evc": "EVC",
+    "pendency": "ಬಾಕಿ",
+    "workload": "ಕೆಲಸದ ಹೊರೆ",
+    "reports": "ವರದಿಗಳು",
+    "meetings": "ಸಭೆಗಳು",
+    "workflow": "ಕಾರ್ಯಹರಿವು",
+    "escalationPolicies": "ಎಸ್ಕಲೇಶನ್ ನೀತಿಗಳು",
+    "templates": "ಟೆಂಪ್ಲೇಟ್‌ಗಳು",
+    "voice": "ವಾಯ್ಸ್",
+    "masterData": "ಮಾಸ್ಟರ್ ಡೇಟಾ",
+    "audit": "ಆಡಿಟ್",
+    "health": "ಸಿಸ್ಟಮ್ ಆರೋಗ್ಯ",
+    "communications": "ಸಂವಹನಗಳು",
+    "approvals": "ಅನುಮೋದನೆಗಳು",
+    "visits": "ಭೇಟಿಗಳು"
+  },
+  "status": {
+    "DRAFT": "ಡ್ರಾಫ್ಟ್",
+    "SUBMITTED": "ಸಲ್ಲಿಸಲಾಗಿದೆ",
+    "IN_PROCESS": "ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ",
+    "DECISION_RECORDED": "ನಿರ್ಣಯ ದಾಖಲಾಗಿದೆ",
+    "APPROVED": "ಅನುಮೋದಿಸಲಾಗಿದೆ",
+    "APPROVED_WITH_CONDITIONS": "ಷರತ್ತುಗಳೊಂದಿಗೆ ಅನುಮೋದಿಸಲಾಗಿದೆ",
+    "REJECTED": "ತಿರಸ್ಕರಿಸಲಾಗಿದೆ",
+    "WITHDRAWN": "ಹಿಂತೆಗೆದುಕೊಳ್ಳಲಾಗಿದೆ",
+    "PENDING": "ಬಾಕಿ ಇದೆ",
+    "ACTIVE": "ಸಕ್ರಿಯ",
+    "COMPLETED": "ಪೂರ್ಣಗೊಂಡಿದೆ",
+    "RETURNED": "ಹಿಂತಿರುಗಿಸಲಾಗಿದೆ",
+    "REFERRED": "ಉಲ್ಲೇಖಿಸಲಾಗಿದೆ",
+    "SKIPPED": "ಬಿಟ್ಟುಬಿಡಲಾಗಿದೆ"
+  },
+  "sla": {
+    "onTime": "{days} ದಿನಗಳು ಬಾಕಿ (ಸಮಯಕ್ಕೆ)",
+    "dueSoon": "{days} ದಿನಗಳು ಬಾಕಿ (ಶೀಘ್ರದಲ್ಲೇ ಬಾಕಿ)",
+    "overdue": "{days} ದಿನಗಳು ತಡವಾಗಿದೆ"
+  },
+  "notifications": {
+    "title": "ಅಧಿಸೂಚನೆಗಳು",
+    "empty": "ಇನ್ನೂ ಅಧಿಸೂಚನೆಗಳಿಲ್ಲ.",
+    "liveConnected": "ಲೈವ್",
+    "liveDisconnected": "ಮರುಸಂಪರ್ಕಿಸುತ್ತಿದೆ…",
+    "markAllRead": "ಎಲ್ಲವನ್ನೂ ಓದಿದಂತೆ ಗುರುತಿಸಿ"
+  },
+  "settings": {
+    "title": "ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+    "profile": "ಪ್ರೊಫೈಲ್",
+    "name": "ಹೆಸರು",
+    "language": "ಆದ್ಯತೆಯ ಭಾಷೆ",
+    "theme": "ಥೀಮ್",
+    "saved": "ಉಳಿಸಲಾಗಿದೆ."
+  },
+  "roleHome": {
+    "greeting": "ನಮಸ್ಕಾರ, {name}",
+    "role": "ಪಾತ್ರ: {role}"
+  }
+}

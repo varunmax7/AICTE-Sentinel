@@ -1,0 +1,117 @@
+{
+  "common": {
+    "appName": "AICTE सेंटिनल",
+    "appFullName": "अनुमोदन एवं अनुपालन पोर्टल",
+    "loading": "लोड हो रहा है…",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "submit": "जमा करें",
+    "close": "बंद करें",
+    "search": "App ID, संस्थान, Faculty ID खोजें…",
+    "language": "भाषा",
+    "theme": "थीम",
+    "themeLight": "लाइट",
+    "themeDark": "डार्क",
+    "themeSystem": "सिस्टम",
+    "comingSoon": "यह स्क्रीन आगामी चरण में बनाई जाएगी।",
+    "version": "v0.1.0-dev"
+  },
+  "auth": {
+    "title": "साइन इन करें",
+    "subtitle": "AICTE अनुमोदन एवं अनुपालन पोर्टल",
+    "roleLabel": "मैं इस रूप में साइन इन कर रहा/रही हूँ",
+    "identifierLabel": "पंजीकृत मोबाइल नंबर",
+    "identifierPlaceholder": "+91XXXXXXXXXX",
+    "sendOtp": "OTP भेजें",
+    "otpLabel": "वन-टाइम पासवर्ड",
+    "otpPlaceholder": "6-अंकों का कोड",
+    "verifyAndLogin": "सत्यापित करें और साइन इन करें",
+    "changeNumber": "नंबर बदलें",
+    "resendOtp": "OTP पुनः भेजें",
+    "demoNotice": "डेमो मोड: OTP 123456 का उपयोग करें",
+    "otpSentTo": "{identifier} पर OTP भेजा गया",
+    "roles": {
+      "INSTITUTION": "संस्थान स्टाफ",
+      "SCRUTINY_OFFICER": "संवीक्षा अधिकारी",
+      "REGIONAL_OFFICER": "क्षेत्रीय अधिकारी",
+      "BUREAU_HEAD": "ब्यूरो प्रमुख",
+      "COMMITTEE_MEMBER": "समिति सदस्य",
+      "EVC_EXPERT": "EVC विशेषज्ञ",
+      "ADMIN": "प्रशासक"
+    },
+    "errors": {
+      "ACCOUNT_NOT_FOUND": "इस नंबर और भूमिका के लिए कोई खाता नहीं मिला।",
+      "INVALID_OTP": "यह कोड सही नहीं है। कृपया पुनः प्रयास करें।",
+      "ROLE_NOT_LOGINABLE": "यह भूमिका यहाँ साइन इन नहीं कर सकती।",
+      "RATE_LIMITED": "बहुत अधिक प्रयास। कृपया कुछ समय बाद पुनः प्रयास करें।",
+      "TOO_MANY_ATTEMPTS": "बहुत अधिक गलत प्रयास। कृपया नया OTP माँगें।",
+      "OTP_NOT_REQUESTED": "कृपया पहले OTP माँगें।",
+      "GENERIC": "कुछ गड़बड़ हुई। कृपया पुनः प्रयास करें।"
+    }
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "queue": "कार्यसूची",
+    "applications": "आवेदन",
+    "compliance": "अनुपालन",
+    "documentVault": "दस्तावेज़ वॉल्ट",
+    "analytics": "विश्लेषण",
+    "settings": "सेटिंग्स",
+    "escalations": "एस्केलेशन",
+    "evc": "EVC",
+    "pendency": "लंबितता",
+    "workload": "कार्यभार",
+    "reports": "रिपोर्ट",
+    "meetings": "बैठकें",
+    "workflow": "कार्यप्रवाह",
+    "escalationPolicies": "एस्केलेशन नीतियाँ",
+    "templates": "टेम्पलेट",
+    "voice": "वॉइस",
+    "masterData": "मास्टर डेटा",
+    "audit": "ऑडिट",
+    "health": "सिस्टम स्वास्थ्य",
+    "communications": "संचार",
+    "approvals": "अनुमोदन",
+    "visits": "विज़िट"
+  },
+  "status": {
+    "DRAFT": "ड्राफ्ट",
+    "SUBMITTED": "जमा किया गया",
+    "IN_PROCESS": "प्रक्रिया में",
+    "DECISION_RECORDED": "निर्णय दर्ज",
+    "APPROVED": "स्वीकृत",
+    "APPROVED_WITH_CONDITIONS": "शर्तों के साथ स्वीकृत",
+    "REJECTED": "अस्वीकृत",
+    "WITHDRAWN": "वापस लिया गया",
+    "PENDING": "लंबित",
+    "ACTIVE": "सक्रिय",
+    "COMPLETED": "पूर्ण",
+    "RETURNED": "वापस किया गया",
+    "REFERRED": "निर्देशित",
+    "SKIPPED": "छोड़ा गया"
+  },
+  "sla": {
+    "onTime": "{days} दिन शेष (समय पर)",
+    "dueSoon": "{days} दिन शेष (शीघ्र देय)",
+    "overdue": "{days} दिन विलंबित"
+  },
+  "notifications": {
+    "title": "सूचनाएं",
+    "empty": "अभी कोई सूचना नहीं।",
+    "liveConnected": "लाइव",
+    "liveDisconnected": "पुनः जुड़ रहा है…",
+    "markAllRead": "सभी को पढ़ा हुआ चिह्नित करें"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "profile": "प्रोफ़ाइल",
+    "name": "नाम",
+    "language": "पसंदीदा भाषा",
+    "theme": "थीम",
+    "saved": "सहेजा गया।"
+  },
+  "roleHome": {
+    "greeting": "नमस्ते, {name}",
+    "role": "भूमिका: {role}"
+  }
+}

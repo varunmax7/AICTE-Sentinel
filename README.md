@@ -11,14 +11,20 @@ validity, with multi-channel alerts and a tamper-evident audit trail.
 
 ## Status
 
-Phase **P0 — Repo, infra, tooling** (see `IMPLEMENTATION.md` §19) is complete:
+Phase **P0 — Repo, infra, tooling** and **P1 — Auth, RBAC, design system, theming, i18n shell**
+(see `IMPLEMENTATION.md` §19) are complete:
 
 - Monorepo scaffolded: `apps/web` (Next.js), `apps/api` (FastAPI), `apps/voice` (FastAPI
   skeleton), `packages/contracts`.
 - Docker Compose stack: postgres (pgvector), redis, minio, api, worker, beat, voice, web, caddy.
 - Lint/typecheck/test wired for every app; CI green.
+- OTP login (Twilio Verify + `DEMO_MODE` fixed OTP) with JWT cookies, RBAC + region scoping,
+  hash-chained audit trail, demo clock, transactional-outbox → SSE live notifications.
+- Design system: tokens, light/dark/system theming, 6-locale i18n (en/hi/te/ml/ta/kn), shared
+  shell + status components, a role-gated page per role, `/dev/components` gallery.
 
-No product features exist yet — those land starting Phase P1 (auth, RBAC, design system, i18n).
+Workflow engine, applications, documents, EVC, committee, compliance tracking, messaging, voice
+integration, dashboards, admin config, AI features, and hardening land in Phases P2–P12.
 
 ## Prerequisites
 
@@ -45,6 +51,16 @@ pnpm --filter web dev          # http://localhost:3000
 
 cd apps/api && uv sync && uv run uvicorn app.main:app --reload   # http://localhost:8000/api/v1/health
 cd apps/voice && uv sync && uv run uvicorn app.main:app --reload --port 8010   # http://localhost:8010/health
+
+# Background jobs (outbox -> SSE, deadline scanner from P7 onward):
+cd apps/api && uv run celery -A app.workers.celery_app.celery_app worker -l info --pool=solo
+#                                                                          ^^^^^^^^^^^^^^^^
+# --pool=solo works around a macOS + Python 3.12 multiprocessing issue with Celery's
+# default prefork pool (fork() under spawn-start-method). Not needed in Docker/Linux.
+cd apps/api && uv run celery -A app.workers.celery_app.celery_app beat -l info
+
+# Seed demo data (one region/institution + one user per role):
+cd apps/api && uv run python -m app.seed
 ```
 
 Exposing `api`/`voice` to Twilio webhooks during local dev:
@@ -77,5 +93,17 @@ data/            APH source PDFs (manual download) + seed data
 
 ## Demo accounts
 
-Not seeded yet — land in Phase P1 (`apps/api/app/seed/seed.py`). This section will list role
-logins and the fixed demo OTP once that phase is done.
+After `uv run python -m app.seed` (or `pnpm seed` from the repo root), with `DEMO_MODE=true`
+(the `.env.example` default) every account below accepts OTP **`123456`**:
+
+| Role | Phone |
+|---|---|
+| `ADMIN` | `+911000000001` |
+| `BUREAU_HEAD` | `+911000000002` |
+| `REGIONAL_OFFICER` | `+911000000003` |
+| `SCRUTINY_OFFICER` | `+911000000004` |
+| `COMMITTEE_MEMBER` | `+911000000005` |
+| `EVC_EXPERT` | `+911000000006` |
+| `INSTITUTION` | `+911000000007` |
+
+Log in at `/login`, pick the role tab, enter the phone number, then the OTP above.

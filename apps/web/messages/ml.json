@@ -1,0 +1,117 @@
+{
+  "common": {
+    "appName": "AICTE സെന്റിനൽ",
+    "appFullName": "അനുമതി & പാലന പോർട്ടൽ",
+    "loading": "ലോഡ് ചെയ്യുന്നു…",
+    "save": "സംരക്ഷിക്കുക",
+    "cancel": "റദ്ദാക്കുക",
+    "submit": "സമർപ്പിക്കുക",
+    "close": "അടയ്ക്കുക",
+    "search": "App ID, സ്ഥാപനം, Faculty ID തിരയുക…",
+    "language": "ഭാഷ",
+    "theme": "തീം",
+    "themeLight": "ലൈറ്റ്",
+    "themeDark": "ഡാർക്ക്",
+    "themeSystem": "സിസ്റ്റം",
+    "comingSoon": "ഈ സ്ക്രീൻ അടുത്ത ഘട്ടത്തിൽ നിർമ്മിക്കും.",
+    "version": "v0.1.0-dev"
+  },
+  "auth": {
+    "title": "സൈൻ ഇൻ ചെയ്യുക",
+    "subtitle": "AICTE അനുമതി & പാലന പോർട്ടൽ",
+    "roleLabel": "ഞാൻ സൈൻ ഇൻ ചെയ്യുന്നത്",
+    "identifierLabel": "രജിസ്റ്റർ ചെയ്ത മൊബൈൽ നമ്പർ",
+    "identifierPlaceholder": "+91XXXXXXXXXX",
+    "sendOtp": "OTP അയയ്ക്കുക",
+    "otpLabel": "വൺ-ടൈം പാസ്‌വേഡ്",
+    "otpPlaceholder": "6-അക്ക കോഡ്",
+    "verifyAndLogin": "പരിശോധിച്ച് സൈൻ ഇൻ ചെയ്യുക",
+    "changeNumber": "നമ്പർ മാറ്റുക",
+    "resendOtp": "OTP വീണ്ടും അയയ്ക്കുക",
+    "demoNotice": "ഡെമോ മോഡ്: OTP 123456 ഉപയോഗിക്കുക",
+    "otpSentTo": "{identifier} എന്നതിലേക്ക് OTP അയച്ചു",
+    "roles": {
+      "INSTITUTION": "സ്ഥാപന ജീവനക്കാർ",
+      "SCRUTINY_OFFICER": "സ്ക്രൂട്ടിനി ഓഫീസർ",
+      "REGIONAL_OFFICER": "റീജിയണൽ ഓഫീസർ",
+      "BUREAU_HEAD": "ബ്യൂറോ ഹെഡ്",
+      "COMMITTEE_MEMBER": "കമ്മിറ്റി അംഗം",
+      "EVC_EXPERT": "EVC വിദഗ്ധൻ",
+      "ADMIN": "അഡ്മിൻ"
+    },
+    "errors": {
+      "ACCOUNT_NOT_FOUND": "ഈ നമ്പറിനും റോളിനും അക്കൗണ്ട് കണ്ടെത്തിയില്ല.",
+      "INVALID_OTP": "ഈ കോഡ് തെറ്റാണ്. വീണ്ടും ശ്രമിക്കുക.",
+      "ROLE_NOT_LOGINABLE": "ഈ റോളിന് ഇവിടെ സൈൻ ഇൻ ചെയ്യാനാവില്ല.",
+      "RATE_LIMITED": "വളരെയധികം ശ്രമങ്ങൾ. അൽപ്പം കഴിഞ്ഞ് ശ്രമിക്കുക.",
+      "TOO_MANY_ATTEMPTS": "വളരെയധികം തെറ്റായ ശ്രമങ്ങൾ. പുതിയ OTP ആവശ്യപ്പെടുക.",
+      "OTP_NOT_REQUESTED": "ആദ്യം OTP ആവശ്യപ്പെടുക.",
+      "GENERIC": "എന്തോ പിഴവ് സംഭവിച്ചു. വീണ്ടും ശ്രമിക്കുക."
+    }
+  },
+  "nav": {
+    "dashboard": "ഡാഷ്ബോർഡ്",
+    "queue": "ക്യൂ",
+    "applications": "അപേക്ഷകൾ",
+    "compliance": "പാലനം",
+    "documentVault": "ഡോക്യുമെന്റ് വോൾട്ട്",
+    "analytics": "അനലിറ്റിക്സ്",
+    "settings": "സെറ്റിംഗ്സ്",
+    "escalations": "എസ്കലേഷനുകൾ",
+    "evc": "EVC",
+    "pendency": "പെൻഡൻസി",
+    "workload": "ജോലിഭാരം",
+    "reports": "റിപ്പോർട്ടുകൾ",
+    "meetings": "മീറ്റിംഗുകൾ",
+    "workflow": "വർക്ക്ഫ്ലോ",
+    "escalationPolicies": "എസ്കലേഷൻ പോളിസികൾ",
+    "templates": "ടെംപ്ലേറ്റുകൾ",
+    "voice": "വോയ്സ്",
+    "masterData": "മാസ്റ്റർ ഡാറ്റ",
+    "audit": "ഓഡിറ്റ്",
+    "health": "സിസ്റ്റം ഹെൽത്ത്",
+    "communications": "കമ്മ്യൂണിക്കേഷനുകൾ",
+    "approvals": "അനുമതികൾ",
+    "visits": "വിസിറ്റുകൾ"
+  },
+  "status": {
+    "DRAFT": "ഡ്രാഫ്റ്റ്",
+    "SUBMITTED": "സമർപ്പിച്ചു",
+    "IN_PROCESS": "പ്രോസസ്സിൽ",
+    "DECISION_RECORDED": "തീരുമാനം രേഖപ്പെടുത്തി",
+    "APPROVED": "അംഗീകരിച്ചു",
+    "APPROVED_WITH_CONDITIONS": "നിബന്ധനകളോടെ അംഗീകരിച്ചു",
+    "REJECTED": "നിരസിച്ചു",
+    "WITHDRAWN": "പിൻവലിച്ചു",
+    "PENDING": "പെൻഡിംഗ്",
+    "ACTIVE": "ആക്റ്റീവ്",
+    "COMPLETED": "പൂർത്തിയായി",
+    "RETURNED": "തിരികെ അയച്ചു",
+    "REFERRED": "റഫർ ചെയ്തു",
+    "SKIPPED": "ഒഴിവാക്കി"
+  },
+  "sla": {
+    "onTime": "{days} ദിവസം ശേഷിക്കുന്നു (സമയത്ത്)",
+    "dueSoon": "{days} ദിവസം ശേഷിക്കുന്നു (ഉടൻ ഡ്യൂ)",
+    "overdue": "{days} ദിവസം കഴിഞ്ഞു"
+  },
+  "notifications": {
+    "title": "അറിയിപ്പുകൾ",
+    "empty": "ഇതുവരെ അറിയിപ്പുകളില്ല.",
+    "liveConnected": "ലൈവ്",
+    "liveDisconnected": "വീണ്ടും കണക്റ്റ് ചെയ്യുന്നു…",
+    "markAllRead": "എല്ലാം വായിച്ചതായി അടയാളപ്പെടുത്തുക"
+  },
+  "settings": {
+    "title": "സെറ്റിംഗ്സ്",
+    "profile": "പ്രൊഫൈൽ",
+    "name": "പേര്",
+    "language": "ഇഷ്ട ഭാഷ",
+    "theme": "തീം",
+    "saved": "സംരക്ഷിച്ചു."
+  },
+  "roleHome": {
+    "greeting": "സ്വാഗതം, {name}",
+    "role": "റോൾ: {role}"
+  }
+}

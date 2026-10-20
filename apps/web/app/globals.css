@@ -1,26 +1,43 @@
 @import "tailwindcss";
+@import "../styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* Map §7.2 tokens onto Tailwind v4 utilities: bg-surface, text-muted,
+ * border-border, bg-topbar, text-topbar-fg, bg-ai-soft, etc. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--text-muted);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+  --color-ai: var(--ai);
+  --color-ai-soft: var(--ai-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-gold-1: var(--gold-1);
+  --color-gold-2: var(--gold-2);
+
+  --color-topbar: var(--topbar-bg);
+  --color-topbar-fg: var(--topbar-fg);
+
+  --radius-token: var(--radius);
+
+  --font-sans: var(--font-sans), var(--font-script), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* Indic scripts get taller line-height to avoid glyph clipping (§7.3). */
+html[data-script="indic"] body {
+  line-height: 1.6;
 }

@@ -1,0 +1,87 @@
+/* Design tokens — IMPLEMENTATION.md §7.2. Theme-aware: light values on
+ * :root, dark values both for system preference (prefers-color-scheme) and
+ * for the explicit next-themes toggle (`data-theme="dark"`).
+ */
+
+:root {
+  --radius: 12px;
+
+  /* brand */
+  --brand-navy: #0e1a33; /* top bar */
+  --brand-navy-2: #15264a;
+  --primary: #2563eb; /* CLEAR STAGE, Compare */
+  --primary-fg: #ffffff;
+  --ai: #6d28d9; /* AI accents */
+  --ai-soft: #ede9fe;
+  --success: #16a34a;
+  --success-soft: #dcfce7;
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --gold-1: #b88a1e;
+  --gold-2: #e2b84a; /* SLA pill */
+
+  /* surfaces (light) */
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --border: #e3e8ef;
+  --text: #0f172a;
+  --text-muted: #5b6475;
+  --topbar-bg: var(--brand-navy);
+  --topbar-fg: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1120;
+    --surface: #111a2e;
+    --surface-2: #16213a;
+    --border: #22314f;
+    --text: #e6eaf2;
+    --text-muted: #94a0b8;
+    --topbar-bg: #070d1a;
+    --success-soft: #0f2e1d;
+    --warning-soft: #33250a;
+    --danger-soft: #3a1414;
+    --ai-soft: #231a3f;
+  }
+}
+
+/* Not just `:root[data-theme="dark"]` — a plain attribute selector also lets
+ * a nested element force a theme regardless of its ancestor (used by the
+ * /dev/components gallery to show light + dark panels side by side). */
+[data-theme="dark"] {
+  --bg: #0a1120;
+  --surface: #111a2e;
+  --surface-2: #16213a;
+  --border: #22314f;
+  --text: #e6eaf2;
+  --text-muted: #94a0b8;
+  --topbar-bg: #070d1a;
+  --success-soft: #0f2e1d;
+  --warning-soft: #33250a;
+  --danger-soft: #3a1414;
+  --ai-soft: #231a3f;
+}
+
+[data-theme="light"] {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --border: #e3e8ef;
+  --text: #0f172a;
+  --text-muted: #5b6475;
+  --topbar-bg: var(--brand-navy);
+  --topbar-fg: #ffffff;
+  --success-soft: #dcfce7;
+  --warning-soft: #fef3c7;
+  --danger-soft: #fee2e2;
+  --ai-soft: #ede9fe;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}

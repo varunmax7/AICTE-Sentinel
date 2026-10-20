@@ -17,7 +17,9 @@ celery_app = Celery(
     "acp",
     broker=settings.REDIS_URL,
     backend=settings.REDIS_URL,
-    include=[],  # task modules are added here as they're implemented, phase by phase
+    include=[
+        "app.workers.tasks.outbox",
+    ],
 )
 
 celery_app.conf.update(
@@ -28,6 +30,6 @@ celery_app.conf.update(
     result_serializer="json",
 )
 
-# Populated in app.workers.beat_schedule once there are tasks to schedule
-# (e.g. deadline_scan every 60s, per §10.3).
-celery_app.conf.beat_schedule = {}
+from app.workers.beat_schedule import beat_schedule  # noqa: E402
+
+celery_app.conf.beat_schedule = beat_schedule

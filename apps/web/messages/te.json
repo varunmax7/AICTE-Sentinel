@@ -1,0 +1,117 @@
+{
+  "common": {
+    "appName": "AICTE సెంటినల్",
+    "appFullName": "అనుమతి మరియు సమ్మతి పోర్టల్",
+    "loading": "లోడ్ అవుతోంది…",
+    "save": "సేవ్ చేయండి",
+    "cancel": "రద్దు చేయండి",
+    "submit": "సమర్పించండి",
+    "close": "మూసివేయండి",
+    "search": "App ID, సంస్థ, Faculty ID శోధించండి…",
+    "language": "భాష",
+    "theme": "థీమ్",
+    "themeLight": "లైట్",
+    "themeDark": "డార్క్",
+    "themeSystem": "సిస్టమ్",
+    "comingSoon": "ఈ స్క్రీన్ తర్వాతి దశలో నిర్మించబడుతుంది.",
+    "version": "v0.1.0-dev"
+  },
+  "auth": {
+    "title": "సైన్ ఇన్ చేయండి",
+    "subtitle": "AICTE అనుమతి మరియు సమ్మతి పోర్టల్",
+    "roleLabel": "నేను ఈ పాత్రగా సైన్ ఇన్ అవుతున్నాను",
+    "identifierLabel": "నమోదైన మొబైల్ నంబర్",
+    "identifierPlaceholder": "+91XXXXXXXXXX",
+    "sendOtp": "OTP పంపండి",
+    "otpLabel": "వన్-టైమ్ పాస్‌వర్డ్",
+    "otpPlaceholder": "6-అంకెల కోడ్",
+    "verifyAndLogin": "ధృవీకరించి సైన్ ఇన్ చేయండి",
+    "changeNumber": "నంబర్ మార్చండి",
+    "resendOtp": "OTP మళ్ళీ పంపండి",
+    "demoNotice": "డెమో మోడ్: OTP 123456 ఉపయోగించండి",
+    "otpSentTo": "{identifier}కు OTP పంపబడింది",
+    "roles": {
+      "INSTITUTION": "సంస్థ సిబ్బంది",
+      "SCRUTINY_OFFICER": "పరిశీలన అధికారి",
+      "REGIONAL_OFFICER": "రీజినల్ అధికారి",
+      "BUREAU_HEAD": "బ్యూరో హెడ్",
+      "COMMITTEE_MEMBER": "కమిటీ సభ్యుడు",
+      "EVC_EXPERT": "EVC నిపుణుడు",
+      "ADMIN": "నిర్వాహకుడు"
+    },
+    "errors": {
+      "ACCOUNT_NOT_FOUND": "ఈ నంబర్ మరియు పాత్రకు ఖాతా కనుగొనబడలేదు.",
+      "INVALID_OTP": "ఈ కోడ్ సరైనది కాదు. దయచేసి మళ్ళీ ప్రయత్నించండి.",
+      "ROLE_NOT_LOGINABLE": "ఈ పాత్ర ఇక్కడ సైన్ ఇన్ కాదు.",
+      "RATE_LIMITED": "చాలా ప్రయత్నాలు. దయచేసి కొంత సేపు వేచి ఉండండి.",
+      "TOO_MANY_ATTEMPTS": "చాలా తప్పు ప్రయత్నాలు. కొత్త OTP అభ్యర్థించండి.",
+      "OTP_NOT_REQUESTED": "దయచేసి మొదట OTP అభ్యర్థించండి.",
+      "GENERIC": "ఏదో తప్పు జరిగింది. దయచేసి మళ్ళీ ప్రయత్నించండి."
+    }
+  },
+  "nav": {
+    "dashboard": "డాష్‌బోర్డ్",
+    "queue": "క్యూ",
+    "applications": "దరఖాస్తులు",
+    "compliance": "సమ్మతి",
+    "documentVault": "డాక్యుమెంట్ వాల్ట్",
+    "analytics": "విశ్లేషణ",
+    "settings": "సెట్టింగ్‌లు",
+    "escalations": "ఎస్కలేషన్‌లు",
+    "evc": "EVC",
+    "pendency": "పెండెన్సీ",
+    "workload": "పని భారం",
+    "reports": "నివేదికలు",
+    "meetings": "సమావేశాలు",
+    "workflow": "వర్క్‌ఫ్లో",
+    "escalationPolicies": "ఎస్కలేషన్ పాలసీలు",
+    "templates": "టెంప్లేట్‌లు",
+    "voice": "వాయిస్",
+    "masterData": "మాస్టర్ డేటా",
+    "audit": "ఆడిట్",
+    "health": "సిస్టమ్ హెల్త్",
+    "communications": "కమ్యూనికేషన్‌లు",
+    "approvals": "అనుమతులు",
+    "visits": "విజిట్‌లు"
+  },
+  "status": {
+    "DRAFT": "డ్రాఫ్ట్",
+    "SUBMITTED": "సమర్పించబడింది",
+    "IN_PROCESS": "ప్రాసెస్‌లో",
+    "DECISION_RECORDED": "నిర్ణయం నమోదు చేయబడింది",
+    "APPROVED": "ఆమోదించబడింది",
+    "APPROVED_WITH_CONDITIONS": "షరతులతో ఆమోదించబడింది",
+    "REJECTED": "తిరస్కరించబడింది",
+    "WITHDRAWN": "ఉపసంహరించబడింది",
+    "PENDING": "పెండింగ్‌లో",
+    "ACTIVE": "యాక్టివ్",
+    "COMPLETED": "పూర్తయింది",
+    "RETURNED": "తిరిగి పంపబడింది",
+    "REFERRED": "సూచించబడింది",
+    "SKIPPED": "స్కిప్ చేయబడింది"
+  },
+  "sla": {
+    "onTime": "{days} రోజులు మిగిలి ఉన్నాయి (సమయానికి)",
+    "dueSoon": "{days} రోజులు మిగిలి ఉన్నాయి (త్వరలో గడువు)",
+    "overdue": "{days} రోజులు మించిపోయింది"
+  },
+  "notifications": {
+    "title": "నోటిఫికేషన్‌లు",
+    "empty": "ఇంకా నోటిఫికేషన్‌లు లేవు.",
+    "liveConnected": "లైవ్",
+    "liveDisconnected": "తిరిగి కనెక్ట్ అవుతోంది…",
+    "markAllRead": "అన్నీ చదివినట్లు గుర్తించండి"
+  },
+  "settings": {
+    "title": "సెట్టింగ్‌లు",
+    "profile": "ప్రొఫైల్",
+    "name": "పేరు",
+    "language": "ప్రాధాన్య భాష",
+    "theme": "థీమ్",
+    "saved": "సేవ్ చేయబడింది."
+  },
+  "roleHome": {
+    "greeting": "నమస్కారం, {name}",
+    "role": "పాత్ర: {role}"
+  }
+}
