@@ -15,7 +15,7 @@ have a role, etc).
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, Field, ValidationError, field_validator, model_validator
 from sqlalchemy import select
@@ -86,7 +86,7 @@ class RuleValidationError(ValueError):
         super().__init__("; ".join(errors))
 
 
-def validate_rule_definition(data: dict[str, object]) -> RuleDefinition:
+def validate_rule_definition(data: dict[str, Any]) -> RuleDefinition:
     try:
         return RuleDefinition.model_validate(data)
     except ValidationError as exc:

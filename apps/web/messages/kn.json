@@ -113,5 +113,172 @@
   "roleHome": {
     "greeting": "ನಮಸ್ಕಾರ, {name}",
     "role": "ಪಾತ್ರ: {role}"
+  },
+  "applicationType": {
+    "NEW_INSTITUTION": "ಹೊಸ ಸಂಸ್ಥೆ",
+    "EXTENSION_OF_APPROVAL": "ಅನುಮೋದನೆ ವಿಸ್ತರಣೆ",
+    "INTAKE_INCREASE": "ಪ್ರವೇಶ ಸಾಮರ್ಥ್ಯ ಹೆಚ್ಚಳ",
+    "NEW_COURSE": "ಹೊಸ ಕೋರ್ಸ್",
+    "CHANGE_OF_NAME": "ಹೆಸರು ಬದಲಾವಣೆ",
+    "CHANGE_OF_SITE": "ಸ್ಥಳ ಬದಲಾವಣೆ",
+    "COLLABORATION": "ಸಹಕಾರ",
+    "CLOSURE": "ಮುಕ್ತಾಯ"
+  },
+  "applications": {
+    "title": "ಅರ್ಜಿಗಳು",
+    "new": "ಹೊಸ ಅರ್ಜಿ",
+    "empty": "ಇನ್ನೂ ಯಾವುದೇ ಅರ್ಜಿಗಳಿಲ್ಲ.",
+    "table": {
+      "appNo": "ಅರ್ಜಿ ಸಂಖ್ಯೆ",
+      "type": "ಪ್ರಕಾರ",
+      "status": "ಸ್ಥಿತಿ",
+      "stage": "ಪ್ರಸ್ತುತ ಹಂತ",
+      "submitted": "ಸಲ್ಲಿಸಲಾಗಿದೆ"
+    },
+    "notSubmitted": "ಸಲ್ಲಿಸಲಾಗಿಲ್ಲ",
+    "viewAction": "ನೋಡಿ",
+    "wizard": {
+      "title": "ಹೊಸ ಅರ್ಜಿ",
+      "steps": {
+        "type": "ಪ್ರಕಾರ",
+        "institution": "ಸಂಸ್ಥೆ",
+        "courses": "ಕೋರ್ಸ್‌ಗಳು & ಪ್ರವೇಶ",
+        "landBuilding": "ಭೂಮಿ & ಕಟ್ಟಡ",
+        "faculty": "ಬೋಧಕ ವರ್ಗ",
+        "documents": "ದಾಖಲೆಗಳು",
+        "precheck": "AI ಪೂರ್ವ-ಪರಿಶೀಲನೆ",
+        "review": "ಪರಿಶೀಲನೆ & ಸಲ್ಲಿಕೆ"
+      },
+      "next": "ಮುಂದೆ",
+      "back": "ಹಿಂದೆ",
+      "typeLabel": "ಅರ್ಜಿ ಪ್ರಕಾರ",
+      "academicYearLabel": "ಶೈಕ್ಷಣಿಕ ವರ್ಷ",
+      "startDraft": "ಡ್ರಾಫ್ಟ್ ಪ್ರಾರಂಭಿಸಿ",
+      "institutionNote": "ಮುಂದುವರಿಯುವ ಮೊದಲು ನಿಮ್ಮ ಸಂಸ್ಥೆಯ ವಿವರಗಳು AICTE ದಾಖಲೆಗಳ ಪ್ರಕಾರ ನವೀಕೃತವಾಗಿವೆ ಎಂದು ದೃಢೀಕರಿಸಿ. ಸಂಸ್ಥೆಯ ವಿವರಗಳನ್ನು ಸೆಟ್ಟಿಂಗ್‌ಗಳಿಂದ ಸಂಪಾದಿಸಬಹುದು.",
+      "courses": {
+        "add": "ಕೋರ್ಸ್ ಸೇರಿಸಿ",
+        "remove": "ತೆಗೆದುಹಾಕಿ",
+        "nameLabel": "ಕೋರ್ಸ್ ಹೆಸರು",
+        "levelLabel": "ಮಟ್ಟ",
+        "existingIntakeLabel": "ಇರುವ ಪ್ರವೇಶ ಸಾಮರ್ಥ್ಯ",
+        "proposedIntakeLabel": "ಪ್ರಸ್ತಾವಿತ ಪ್ರವೇಶ ಸಾಮರ್ಥ್ಯ",
+        "empty": "ಇನ್ನೂ ಯಾವುದೇ ಕೋರ್ಸ್‌ಗಳನ್ನು ಸೇರಿಸಲಾಗಿಲ್ಲ."
+      },
+      "landBuilding": {
+        "landAreaLabel": "ಭೂಮಿ ವಿಸ್ತೀರ್ಣ (ಎಕರೆ)",
+        "builtUpAreaLabel": "ನಿರ್ಮಿತ ವಿಸ್ತೀರ್ಣ (ಚ.ಅ.)"
+      },
+      "faculty": {
+        "importNote": "Excel ಮೂಲಕ ಬೋಧಕ ವರ್ಗದ ಪಟ್ಟಿ ಆಮದು ನಂತರದ ಹಂತದಲ್ಲಿ ಲಭ್ಯವಾಗುತ್ತದೆ. ಇದು ಇಲ್ಲದೆ ಈಗ ಮುಂದುವರಿಯಬಹುದು.",
+        "importLabel": "ಬೋಧಕ ವರ್ಗದ ಪಟ್ಟಿಯನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ (.xlsx)"
+      },
+      "documents": {
+        "checklistNote": "ಅಗತ್ಯವಿರುವ ಪ್ರತಿ ದಾಖಲೆ ಸಿದ್ಧವಾಗಿದೆ ಎಂದು ದೃಢೀಕರಿಸಿ. ದಾಖಲೆ ಅಪ್‌ಲೋಡ್ ಮತ್ತು AI ಪರಿಶೀಲನೆ ನಂತರದ ಹಂತದಲ್ಲಿ ಲಭ್ಯವಾಗುತ್ತದೆ.",
+        "haveIt": "ಇದು ನನ್ನ ಬಳಿ ಸಿದ್ಧವಾಗಿದೆ",
+        "empty": "ಈ ಅರ್ಜಿ ಪ್ರಕಾರಕ್ಕೆ ಯಾವುದೇ ದಾಖಲೆಗಳು ಅಗತ್ಯವಿಲ್ಲ."
+      },
+      "precheck": {
+        "pendingTitle": "AI ಪೂರ್ವ-ಪರಿಶೀಲನೆ",
+        "pendingNote": "AI ಪೂರ್ವ-ಪರಿಶೀಲನೆ ಇನ್ನೂ ಲಭ್ಯವಿಲ್ಲ — ಇದು ನಂತರದ ಹಂತದಲ್ಲಿ ಸೇರಿಸಲಾಗುವುದು. ನೀವು ಪರಿಶೀಲನೆ & ಸಲ್ಲಿಕೆಗೆ ಮುಂದುವರಿಯಬಹುದು.",
+        "run": "ಪೂರ್ವ-ಪರಿಶೀಲನೆ ನಡೆಸಿ"
+      },
+      "review": {
+        "title": "ಪರಿಶೀಲನೆ & ಸಲ್ಲಿಕೆ",
+        "summary": "ಸಾರಾಂಶ",
+        "otpNote": "ಸಲ್ಲಿಕೆಯನ್ನು ದೃಢೀಕರಿಸಲು ನಿಮ್ಮ ನೋಂದಾಯಿತ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಗೆ OTP ಕಳುಹಿಸಲಾಗುತ್ತದೆ.",
+        "sendOtp": "OTP ಕಳುಹಿಸಿ",
+        "otpLabel": "ಒನ್-ಟೈಮ್ ಪಾಸ್‌ವರ್ಡ್",
+        "submit": "ಅರ್ಜಿ ಸಲ್ಲಿಸಿ",
+        "success": "ಅರ್ಜಿ ಸಲ್ಲಿಸಲಾಗಿದೆ — ಅರ್ಜಿ ಸಂಖ್ಯೆ {appNo}"
+      },
+      "errors": {
+        "GENERIC": "ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+        "RULE_NOT_PUBLISHED": "ಈ ಅರ್ಜಿ ಪ್ರಕಾರ ಮತ್ತು ಶೈಕ್ಷಣಿಕ ವರ್ಷಕ್ಕೆ ಪ್ರಕಟಿತ ಕಾರ್ಯಹರಿವು ನಿಯಮ ಇಲ್ಲ.",
+        "INVALID_OTP": "ಆ ಕೋಡ್ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+      }
+    },
+    "detail": {
+      "tabs": {
+        "overview": "ಅವಲೋಕನ",
+        "documents": "ದಾಖಲೆಗಳು",
+        "deficiencies": "ಕೊರತೆಗಳು",
+        "evc": "EVC",
+        "timeline": "ಕಾಲಾನುಕ್ರಮ",
+        "communications": "ಸಂವಹನಗಳು"
+      },
+      "currentStage": "ಪ್ರಸ್ತುತ ಹಂತ",
+      "withdraw": "ಅರ್ಜಿ ಹಿಂಪಡೆಯಿರಿ",
+      "withdrawConfirm": "ಈ ಅರ್ಜಿಯನ್ನು ಹಿಂಪಡೆಯಬೇಕೆ? ಇದನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗುವುದಿಲ್ಲ.",
+      "auditTrail": "ಆಡಿಟ್ ಟ್ರೇಲ್",
+      "noDeficiencies": "ಈ ಅರ್ಜಿಯಲ್ಲಿ ಯಾವುದೇ ಕೊರತೆಗಳಿಲ್ಲ.",
+      "respondTitle": "ಕೊರತೆಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಿ",
+      "responseLabel": "ನಿಮ್ಮ ಪ್ರತಿಕ್ರಿಯೆ",
+      "submitResponse": "ಪ್ರತಿಕ್ರಿಯೆ ಸಲ್ಲಿಸಿ",
+      "responseSubmitted": "ಪ್ರತಿಕ್ರಿಯೆ ಸಲ್ಲಿಸಲಾಗಿದೆ — ಹಂತ ಮತ್ತೆ ಸಕ್ರಿಯವಾಗಿದೆ.",
+      "documentsPlaceholder": "ದಾಖಲೆ ನಿರ್ವಹಣೆ ನಂತರದ ಹಂತದಲ್ಲಿ ಲಭ್ಯವಾಗುತ್ತದೆ.",
+      "evcPlaceholder": "EVC ವೇಳಾಪಟ್ಟಿ ವಿವರಗಳು ನಂತರದ ಹಂತದಲ್ಲಿ ಲಭ್ಯವಾಗುತ್ತವೆ.",
+      "communicationsPlaceholder": "ಸಂವಹನ ಇತಿಹಾಸ ನಂತರದ ಹಂತದಲ್ಲಿ ಲಭ್ಯವಾಗುತ್ತದೆ."
+    }
+  },
+  "deficiency": {
+    "missingDocument": "ದಾಖಲೆ ಕಾಣೆಯಾಗಿದೆ",
+    "fireNocExpired": "ಫೈರ್ NOC ಅವಧಿ ಮುಗಿದಿದೆ",
+    "landAreaShortfall": "ಭೂಮಿ ವಿಸ್ತೀರ್ಣ ಕೊರತೆ",
+    "invalidSignature": "ಅಮಾನ್ಯ ಸಹಿ",
+    "incompleteFacultyData": "ಅಪೂರ್ಣ ಬೋಧಕ ವರ್ಗದ ಡೇಟಾ",
+    "other": "ಇತರೆ"
+  },
+  "queue": {
+    "title": "ಸರತಿ",
+    "empty": "ನಿಮ್ಮ ಸರತಿ ಖಾಲಿಯಾಗಿದೆ.",
+    "table": {
+      "appNo": "ಅರ್ಜಿ ಸಂಖ್ಯೆ",
+      "institution": "ಸಂಸ್ಥೆ",
+      "stage": "ಹಂತ",
+      "sla": "SLA",
+      "aiFlags": "AI ಫ್ಲ್ಯಾಗ್‌ಗಳು"
+    },
+    "openAction": "ತೆರೆಯಿರಿ"
+  },
+  "stageDetail": {
+    "backToQueue": "ಸರತಿಗೆ ಹಿಂತಿರುಗಿ",
+    "allowedActions": "ಕ್ರಿಯೆಗಳು",
+    "actions": {
+      "CLEAR": "ಹಂತವನ್ನು ತೆರವುಗೊಳಿಸಿ ಮುಂದೆ ಕಳುಹಿಸಿ",
+      "RETURN": "ಕೊರತೆಗಾಗಿ ಹಿಂತಿರುಗಿಸಿ",
+      "REFER_SENIOR": "ಹಿರಿಯ ಅಧಿಕಾರಿಗೆ ಉಲ್ಲೇಖಿಸಿ",
+      "REQUEST_CLARIFICATION": "ಸ್ಪಷ್ಟೀಕರಣ ಕೇಳಿ"
+    },
+    "returnModal": {
+      "title": "ಅರ್ಜಿಯನ್ನು ಹಿಂತಿರುಗಿಸಿ",
+      "reasonLabel": "ಕಾರಣ",
+      "deficienciesLabel": "ಕೊರತೆಗಳು",
+      "addDeficiency": "ಕೊರತೆ ಸೇರಿಸಿ",
+      "reasonCodeLabel": "ಕಾರಣ ಕೋಡ್",
+      "customTextLabel": "ವಿವರಗಳು",
+      "letterLabel": "ಕೊರತೆ ಪತ್ರ (ಸಂಪಾದಿಸಬಹುದಾದ, AI-ರಚಿತ)",
+      "send": "ಹಿಂತಿರುಗಿಸಿ ಮತ್ತು ಪತ್ರ ಉಳಿಸಿ",
+      "cancel": "ರದ್ದುಗೊಳಿಸಿ",
+      "maxReturnsWarning": "ಈ ಅರ್ಜಿಯನ್ನು ಈಗಾಗಲೇ ಗರಿಷ್ಠ ಬಾರಿ ಹಿಂತಿರುಗಿಸಲಾಗಿದೆ."
+    },
+    "referModal": {
+      "title": "ಹಿರಿಯ ಅಧಿಕಾರಿಗೆ ಉಲ್ಲೇಖಿಸಿ",
+      "reasonLabel": "ಕಾರಣ",
+      "submit": "ಉಲ್ಲೇಖಿಸಿ",
+      "cancel": "ರದ್ದುಗೊಳಿಸಿ"
+    },
+    "clarifyModal": {
+      "title": "ಸ್ಪಷ್ಟೀಕರಣ ಕೇಳಿ",
+      "reasonLabel": "ಕಾರಣ",
+      "submit": "ಕೇಳಿ",
+      "cancel": "ರದ್ದುಗೊಳಿಸಿ"
+    },
+    "errors": {
+      "GENERIC": "ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+      "REASON_REQUIRED": "ಒಂದು ಕಾರಣ ಅಗತ್ಯವಿದೆ.",
+      "DEFICIENCY_REQUIRED": "ಕನಿಷ್ಠ ಒಂದು ಕೊರತೆ ಅಗತ್ಯವಿದೆ.",
+      "STAGE_NOT_ASSIGNED_TO_YOU": "ಈ ಪ್ರಕರಣವನ್ನು ನಿಮಗೆ ನಿಗದಿಪಡಿಸಲಾಗಿಲ್ಲ.",
+      "STAGE_NOT_ACTIVE": "ಈ ಹಂತ ಇನ್ನು ಮುಂದೆ ಸಕ್ರಿಯವಾಗಿಲ್ಲ."
+    }
   }
 }

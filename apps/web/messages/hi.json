@@ -113,5 +113,172 @@
   "roleHome": {
     "greeting": "नमस्ते, {name}",
     "role": "भूमिका: {role}"
+  },
+  "applicationType": {
+    "NEW_INSTITUTION": "नई संस्था",
+    "EXTENSION_OF_APPROVAL": "अनुमोदन विस्तार",
+    "INTAKE_INCREASE": "प्रवेश क्षमता वृद्धि",
+    "NEW_COURSE": "नया पाठ्यक्रम",
+    "CHANGE_OF_NAME": "नाम परिवर्तन",
+    "CHANGE_OF_SITE": "स्थल परिवर्तन",
+    "COLLABORATION": "सहयोग",
+    "CLOSURE": "समापन"
+  },
+  "applications": {
+    "title": "आवेदन",
+    "new": "नया आवेदन",
+    "empty": "अभी तक कोई आवेदन नहीं है।",
+    "table": {
+      "appNo": "आवेदन सं.",
+      "type": "प्रकार",
+      "status": "स्थिति",
+      "stage": "वर्तमान चरण",
+      "submitted": "प्रस्तुत किया गया"
+    },
+    "notSubmitted": "प्रस्तुत नहीं किया गया",
+    "viewAction": "देखें",
+    "wizard": {
+      "title": "नया आवेदन",
+      "steps": {
+        "type": "प्रकार",
+        "institution": "संस्था",
+        "courses": "पाठ्यक्रम और प्रवेश",
+        "landBuilding": "भूमि और भवन",
+        "faculty": "संकाय",
+        "documents": "दस्तावेज़",
+        "precheck": "AI पूर्व-जाँच",
+        "review": "समीक्षा और प्रस्तुतीकरण"
+      },
+      "next": "आगे",
+      "back": "पीछे",
+      "typeLabel": "आवेदन प्रकार",
+      "academicYearLabel": "शैक्षणिक वर्ष",
+      "startDraft": "ड्राफ्ट शुरू करें",
+      "institutionNote": "आगे बढ़ने से पहले कृपया पुष्टि करें कि आपकी संस्था का विवरण AICTE रिकॉर्ड के अनुसार अद्यतन है। संस्था विवरण सेटिंग्स से संपादित किया जा सकता है।",
+      "courses": {
+        "add": "पाठ्यक्रम जोड़ें",
+        "remove": "हटाएं",
+        "nameLabel": "पाठ्यक्रम का नाम",
+        "levelLabel": "स्तर",
+        "existingIntakeLabel": "मौजूदा प्रवेश क्षमता",
+        "proposedIntakeLabel": "प्रस्तावित प्रवेश क्षमता",
+        "empty": "अभी तक कोई पाठ्यक्रम नहीं जोड़ा गया।"
+      },
+      "landBuilding": {
+        "landAreaLabel": "भूमि क्षेत्र (एकड़)",
+        "builtUpAreaLabel": "निर्मित क्षेत्र (वर्ग फुट)"
+      },
+      "faculty": {
+        "importNote": "Excel के माध्यम से संकाय सूची आयात बाद के चरण में उपलब्ध होगा। अभी इसके बिना आगे बढ़ सकते हैं।",
+        "importLabel": "संकाय सूची अपलोड करें (.xlsx)"
+      },
+      "documents": {
+        "checklistNote": "कृपया पुष्टि करें कि आपके पास प्रत्येक आवश्यक दस्तावेज़ तैयार है। दस्तावेज़ अपलोड और AI सत्यापन बाद के चरण में उपलब्ध होंगे।",
+        "haveIt": "यह मेरे पास तैयार है",
+        "empty": "इस आवेदन प्रकार के लिए कोई दस्तावेज़ आवश्यक नहीं है।"
+      },
+      "precheck": {
+        "pendingTitle": "AI पूर्व-जाँच",
+        "pendingNote": "AI पूर्व-जाँच अभी उपलब्ध नहीं है — यह बाद के चरण में जोड़ी जाएगी। आप समीक्षा और प्रस्तुतीकरण के लिए आगे बढ़ सकते हैं।",
+        "run": "पूर्व-जाँच चलाएं"
+      },
+      "review": {
+        "title": "समीक्षा और प्रस्तुतीकरण",
+        "summary": "सारांश",
+        "otpNote": "प्रस्तुतीकरण की पुष्टि के लिए आपके पंजीकृत मोबाइल नंबर पर OTP भेजा जाएगा।",
+        "sendOtp": "OTP भेजें",
+        "otpLabel": "वन-टाइम पासवर्ड",
+        "submit": "आवेदन प्रस्तुत करें",
+        "success": "आवेदन प्रस्तुत किया गया — आवेदन सं. {appNo}"
+      },
+      "errors": {
+        "GENERIC": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
+        "RULE_NOT_PUBLISHED": "इस आवेदन प्रकार और शैक्षणिक वर्ष के लिए अभी कोई प्रकाशित कार्यप्रवाह नियम मौजूद नहीं है।",
+        "INVALID_OTP": "वह कोड गलत है। कृपया पुनः प्रयास करें।"
+      }
+    },
+    "detail": {
+      "tabs": {
+        "overview": "अवलोकन",
+        "documents": "दस्तावेज़",
+        "deficiencies": "कमियां",
+        "evc": "EVC",
+        "timeline": "समयरेखा",
+        "communications": "संचार"
+      },
+      "currentStage": "वर्तमान चरण",
+      "withdraw": "आवेदन वापस लें",
+      "withdrawConfirm": "इस आवेदन को वापस लें? इसे पूर्ववत नहीं किया जा सकता।",
+      "auditTrail": "ऑडिट ट्रेल",
+      "noDeficiencies": "इस आवेदन में कोई कमी नहीं है।",
+      "respondTitle": "कमी का जवाब दें",
+      "responseLabel": "आपका जवाब",
+      "submitResponse": "जवाब प्रस्तुत करें",
+      "responseSubmitted": "जवाब प्रस्तुत किया गया — चरण पुनः सक्रिय हो गया है।",
+      "documentsPlaceholder": "दस्तावेज़ प्रबंधन बाद के चरण में जोड़ा जाएगा।",
+      "evcPlaceholder": "EVC शेड्यूलिंग विवरण बाद के चरण में जोड़ा जाएगा।",
+      "communicationsPlaceholder": "संचार इतिहास बाद के चरण में जोड़ा जाएगा।"
+    }
+  },
+  "deficiency": {
+    "missingDocument": "दस्तावेज़ गायब",
+    "fireNocExpired": "फायर एनओसी समाप्त",
+    "landAreaShortfall": "भूमि क्षेत्र की कमी",
+    "invalidSignature": "अमान्य हस्ताक्षर",
+    "incompleteFacultyData": "अपूर्ण संकाय डेटा",
+    "other": "अन्य"
+  },
+  "queue": {
+    "title": "कार्यसूची",
+    "empty": "आपकी कार्यसूची खाली है।",
+    "table": {
+      "appNo": "आवेदन सं.",
+      "institution": "संस्था",
+      "stage": "चरण",
+      "sla": "SLA",
+      "aiFlags": "AI फ्लैग"
+    },
+    "openAction": "खोलें"
+  },
+  "stageDetail": {
+    "backToQueue": "कार्यसूची पर वापस जाएं",
+    "allowedActions": "कार्रवाई",
+    "actions": {
+      "CLEAR": "चरण स्वीकृत करें और आगे भेजें",
+      "RETURN": "कमी के लिए वापस करें",
+      "REFER_SENIOR": "वरिष्ठ को संदर्भित करें",
+      "REQUEST_CLARIFICATION": "स्पष्टीकरण मांगें"
+    },
+    "returnModal": {
+      "title": "आवेदन वापस करें",
+      "reasonLabel": "कारण",
+      "deficienciesLabel": "कमियां",
+      "addDeficiency": "कमी जोड़ें",
+      "reasonCodeLabel": "कारण कोड",
+      "customTextLabel": "विवरण",
+      "letterLabel": "कमी पत्र (संपादन योग्य, AI-निर्मित)",
+      "send": "वापस करें और पत्र सहेजें",
+      "cancel": "रद्द करें",
+      "maxReturnsWarning": "इस आवेदन को अधिकतम बार वापस किया जा चुका है।"
+    },
+    "referModal": {
+      "title": "वरिष्ठ अधिकारी को संदर्भित करें",
+      "reasonLabel": "कारण",
+      "submit": "संदर्भित करें",
+      "cancel": "रद्द करें"
+    },
+    "clarifyModal": {
+      "title": "स्पष्टीकरण मांगें",
+      "reasonLabel": "कारण",
+      "submit": "मांगें",
+      "cancel": "रद्द करें"
+    },
+    "errors": {
+      "GENERIC": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
+      "REASON_REQUIRED": "एक कारण आवश्यक है।",
+      "DEFICIENCY_REQUIRED": "कम से कम एक कमी आवश्यक है।",
+      "STAGE_NOT_ASSIGNED_TO_YOU": "यह केस आपको सौंपा नहीं गया है।",
+      "STAGE_NOT_ACTIVE": "यह चरण अब सक्रिय नहीं है।"
+    }
   }
 }

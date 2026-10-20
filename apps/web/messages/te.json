@@ -113,5 +113,172 @@
   "roleHome": {
     "greeting": "నమస్కారం, {name}",
     "role": "పాత్ర: {role}"
+  },
+  "applicationType": {
+    "NEW_INSTITUTION": "నూతన సంస్థ",
+    "EXTENSION_OF_APPROVAL": "ఆమోదం పొడిగింపు",
+    "INTAKE_INCREASE": "ప్రవేశాల పెంపు",
+    "NEW_COURSE": "నూతన కోర్సు",
+    "CHANGE_OF_NAME": "పేరు మార్పు",
+    "CHANGE_OF_SITE": "స్థల మార్పు",
+    "COLLABORATION": "సహకారం",
+    "CLOSURE": "మూసివేత"
+  },
+  "applications": {
+    "title": "దరఖాస్తులు",
+    "new": "కొత్త దరఖాస్తు",
+    "empty": "ఇప్పటివరకు దరఖాస్తులు లేవు.",
+    "table": {
+      "appNo": "దరఖాస్తు సంఖ్య",
+      "type": "రకం",
+      "status": "స్థితి",
+      "stage": "ప్రస్తుత దశ",
+      "submitted": "సమర్పించబడింది"
+    },
+    "notSubmitted": "సమర్పించలేదు",
+    "viewAction": "చూడండి",
+    "wizard": {
+      "title": "కొత్త దరఖాస్తు",
+      "steps": {
+        "type": "రకం",
+        "institution": "సంస్థ",
+        "courses": "కోర్సులు & ప్రవేశాలు",
+        "landBuilding": "భూమి & భవనం",
+        "faculty": "అధ్యాపక వర్గం",
+        "documents": "పత్రాలు",
+        "precheck": "AI ముందస్తు పరిశీలన",
+        "review": "సమీక్ష & సమర్పణ"
+      },
+      "next": "తదుపరి",
+      "back": "వెనుకకు",
+      "typeLabel": "దరఖాస్తు రకం",
+      "academicYearLabel": "విద్యా సంవత్సరం",
+      "startDraft": "డ్రాఫ్ట్ ప్రారంభించండి",
+      "institutionNote": "కొనసాగించే ముందు మీ సంస్థ వివరాలు AICTE రికార్డుల ప్రకారం తాజాగా ఉన్నాయో నిర్ధారించుకోండి. సంస్థ వివరాలను సెట్టింగ్స్ నుండి సవరించవచ్చు.",
+      "courses": {
+        "add": "కోర్సు జోడించండి",
+        "remove": "తొలగించండి",
+        "nameLabel": "కోర్సు పేరు",
+        "levelLabel": "స్థాయి",
+        "existingIntakeLabel": "ఇప్పటి ప్రవేశ సంఖ్య",
+        "proposedIntakeLabel": "ప్రతిపాదిత ప్రవేశ సంఖ్య",
+        "empty": "ఇంకా కోర్సులు జోడించలేదు."
+      },
+      "landBuilding": {
+        "landAreaLabel": "భూమి విస్తీర్ణం (ఎకరాలు)",
+        "builtUpAreaLabel": "నిర్మిత విస్తీర్ణం (చ.అ.)"
+      },
+      "faculty": {
+        "importNote": "Excel ద్వారా అధ్యాపక వివరాల దిగుమతి తర్వాతి దశలో అందుబాటులోకి వస్తుంది. ఇప్పుడు దీనిలేకుండా కొనసాగవచ్చు.",
+        "importLabel": "అధ్యాపక వివరాలు అప్‌లోడ్ చేయండి (.xlsx)"
+      },
+      "documents": {
+        "checklistNote": "ప్రతి అవసరమైన పత్రం సిద్ధంగా ఉందని నిర్ధారించుకోండి. పత్ర అప్‌లోడ్ మరియు AI పరిశీలన తర్వాతి దశలో అందుబాటులోకి వస్తాయి.",
+        "haveIt": "ఇది నా వద్ద సిద్ధంగా ఉంది",
+        "empty": "ఈ దరఖాస్తు రకానికి పత్రాలు అవసరం లేదు."
+      },
+      "precheck": {
+        "pendingTitle": "AI ముందస్తు పరిశీలన",
+        "pendingNote": "AI ముందస్తు పరిశీలన ఇంకా అందుబాటులో లేదు — ఇది తర్వాతి దశలో వస్తుంది. మీరు సమీక్ష & సమర్పణకు కొనసాగవచ్చు.",
+        "run": "ముందస్తు పరిశీలన నడపండి"
+      },
+      "review": {
+        "title": "సమీక్ష & సమర్పణ",
+        "summary": "సారాంశం",
+        "otpNote": "సమర్పణను నిర్ధారించడానికి మీ నమోదిత మొబైల్ నంబర్‌కు OTP పంపబడుతుంది.",
+        "sendOtp": "OTP పంపండి",
+        "otpLabel": "వన్-టైమ్ పాస్‌వర్డ్",
+        "submit": "దరఖాస్తు సమర్పించండి",
+        "success": "దరఖాస్తు సమర్పించబడింది — దరఖాస్తు సంఖ్య {appNo}"
+      },
+      "errors": {
+        "GENERIC": "ఏదో తప్పు జరిగింది. దయచేసి మళ్లీ ప్రయత్నించండి.",
+        "RULE_NOT_PUBLISHED": "ఈ దరఖాస్తు రకం మరియు విద్యా సంవత్సరానికి ప్రచురించిన కార్యప్రవాహ నియమం లేదు.",
+        "INVALID_OTP": "ఆ కోడ్ తప్పు. దయచేసి మళ్లీ ప్రయత్నించండి."
+      }
+    },
+    "detail": {
+      "tabs": {
+        "overview": "అవలోకనం",
+        "documents": "పత్రాలు",
+        "deficiencies": "లోపాలు",
+        "evc": "EVC",
+        "timeline": "కాలరేఖ",
+        "communications": "సమాచార మార్పిడి"
+      },
+      "currentStage": "ప్రస్తుత దశ",
+      "withdraw": "దరఖాస్తు ఉపసంహరించుకోండి",
+      "withdrawConfirm": "ఈ దరఖాస్తును ఉపసంహరించుకోవాలా? దీన్ని రద్దు చేయలేరు.",
+      "auditTrail": "ఆడిట్ ట్రెయిల్",
+      "noDeficiencies": "ఈ దరఖాస్తులో లోపాలు లేవు.",
+      "respondTitle": "లోపానికి స్పందించండి",
+      "responseLabel": "మీ స్పందన",
+      "submitResponse": "స్పందన సమర్పించండి",
+      "responseSubmitted": "స్పందన సమర్పించబడింది — దశ మళ్లీ సక్రియమైంది.",
+      "documentsPlaceholder": "పత్ర నిర్వహణ తర్వాతి దశలో వస్తుంది.",
+      "evcPlaceholder": "EVC షెడ్యూలింగ్ వివరాలు తర్వాతి దశలో వస్తాయి.",
+      "communicationsPlaceholder": "సమాచార మార్పిడి చరిత్ర తర్వాతి దశలో వస్తుంది."
+    }
+  },
+  "deficiency": {
+    "missingDocument": "పత్రం లేదు",
+    "fireNocExpired": "ఫైర్ NOC గడువు తీరింది",
+    "landAreaShortfall": "భూమి విస్తీర్ణం లోటు",
+    "invalidSignature": "చెల్లని సంతకం",
+    "incompleteFacultyData": "అసంపూర్ణ అధ్యాపక డేటా",
+    "other": "ఇతర"
+  },
+  "queue": {
+    "title": "క్యూ",
+    "empty": "మీ క్యూ ఖాళీగా ఉంది.",
+    "table": {
+      "appNo": "దరఖాస్తు సంఖ్య",
+      "institution": "సంస్థ",
+      "stage": "దశ",
+      "sla": "SLA",
+      "aiFlags": "AI ఫ్లాగ్‌లు"
+    },
+    "openAction": "తెరవండి"
+  },
+  "stageDetail": {
+    "backToQueue": "క్యూకు తిరిగి వెళ్లండి",
+    "allowedActions": "చర్యలు",
+    "actions": {
+      "CLEAR": "దశను క్లియర్ చేసి ముందుకు పంపండి",
+      "RETURN": "లోపం కోసం తిరిగి పంపండి",
+      "REFER_SENIOR": "సీనియర్‌కు సూచించండి",
+      "REQUEST_CLARIFICATION": "వివరణ అడగండి"
+    },
+    "returnModal": {
+      "title": "దరఖాస్తును తిరిగి పంపండి",
+      "reasonLabel": "కారణం",
+      "deficienciesLabel": "లోపాలు",
+      "addDeficiency": "లోపం జోడించండి",
+      "reasonCodeLabel": "కారణ కోడ్",
+      "customTextLabel": "వివరాలు",
+      "letterLabel": "లోప లేఖ (సవరించదగినది, AI-రూపొందించినది)",
+      "send": "తిరిగి పంపి లేఖను సేవ్ చేయండి",
+      "cancel": "రద్దు చేయండి",
+      "maxReturnsWarning": "ఈ దరఖాస్తు గరిష్ట సంఖ్యలో తిరిగి పంపబడింది."
+    },
+    "referModal": {
+      "title": "సీనియర్ అధికారికి సూచించండి",
+      "reasonLabel": "కారణం",
+      "submit": "సూచించండి",
+      "cancel": "రద్దు చేయండి"
+    },
+    "clarifyModal": {
+      "title": "వివరణ అడగండి",
+      "reasonLabel": "కారణం",
+      "submit": "అడగండి",
+      "cancel": "రద్దు చేయండి"
+    },
+    "errors": {
+      "GENERIC": "ఏదో తప్పు జరిగింది. దయచేసి మళ్లీ ప్రయత్నించండి.",
+      "REASON_REQUIRED": "ఒక కారణం అవసరం.",
+      "DEFICIENCY_REQUIRED": "కనీసం ఒక లోపం అవసరం.",
+      "STAGE_NOT_ASSIGNED_TO_YOU": "ఈ కేసు మీకు అప్పగించబడలేదు.",
+      "STAGE_NOT_ACTIVE": "ఈ దశ ఇప్పుడు సక్రియంగా లేదు."
+    }
   }
 }

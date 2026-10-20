@@ -113,5 +113,172 @@
   "roleHome": {
     "greeting": "Welcome, {name}",
     "role": "Role: {role}"
+  },
+  "applicationType": {
+    "NEW_INSTITUTION": "New Institution",
+    "EXTENSION_OF_APPROVAL": "Extension of Approval",
+    "INTAKE_INCREASE": "Intake Increase",
+    "NEW_COURSE": "New Course",
+    "CHANGE_OF_NAME": "Change of Name",
+    "CHANGE_OF_SITE": "Change of Site",
+    "COLLABORATION": "Collaboration",
+    "CLOSURE": "Closure"
+  },
+  "applications": {
+    "title": "Applications",
+    "new": "New Application",
+    "empty": "No applications yet.",
+    "table": {
+      "appNo": "App No.",
+      "type": "Type",
+      "status": "Status",
+      "stage": "Current Stage",
+      "submitted": "Submitted"
+    },
+    "notSubmitted": "Not submitted",
+    "viewAction": "View",
+    "wizard": {
+      "title": "New Application",
+      "steps": {
+        "type": "Type",
+        "institution": "Institution",
+        "courses": "Courses & Intake",
+        "landBuilding": "Land & Building",
+        "faculty": "Faculty",
+        "documents": "Documents",
+        "precheck": "AI Pre-check",
+        "review": "Review & Submit"
+      },
+      "next": "Next",
+      "back": "Back",
+      "typeLabel": "Application type",
+      "academicYearLabel": "Academic year",
+      "startDraft": "Start draft",
+      "institutionNote": "Confirm your institution's details are current with AICTE records before proceeding. Editing institution details is available from Settings.",
+      "courses": {
+        "add": "Add course",
+        "remove": "Remove",
+        "nameLabel": "Course name",
+        "levelLabel": "Level",
+        "existingIntakeLabel": "Existing intake",
+        "proposedIntakeLabel": "Proposed intake",
+        "empty": "No courses added yet."
+      },
+      "landBuilding": {
+        "landAreaLabel": "Land area (acres)",
+        "builtUpAreaLabel": "Built-up area (sq. ft.)"
+      },
+      "faculty": {
+        "importNote": "Faculty roster import via Excel lands in a later phase. You can proceed without it for now.",
+        "importLabel": "Upload faculty roster (.xlsx)"
+      },
+      "documents": {
+        "checklistNote": "Confirm you have each required document ready. Upload and AI verification of documents land in a later phase.",
+        "haveIt": "I have this ready",
+        "empty": "No documents are required for this application type."
+      },
+      "precheck": {
+        "pendingTitle": "AI pre-check",
+        "pendingNote": "AI pre-check is not available yet — it lands in a later phase. You may proceed to review and submit.",
+        "run": "Run pre-check"
+      },
+      "review": {
+        "title": "Review & Submit",
+        "summary": "Summary",
+        "otpNote": "An OTP will be sent to your registered mobile number to confirm submission.",
+        "sendOtp": "Send OTP",
+        "otpLabel": "One-Time Password",
+        "submit": "Submit Application",
+        "success": "Application submitted — App No. {appNo}"
+      },
+      "errors": {
+        "GENERIC": "Something went wrong. Please try again.",
+        "RULE_NOT_PUBLISHED": "No published workflow rule exists for this application type and academic year yet.",
+        "INVALID_OTP": "That code is incorrect. Please try again."
+      }
+    },
+    "detail": {
+      "tabs": {
+        "overview": "Overview",
+        "documents": "Documents",
+        "deficiencies": "Deficiencies",
+        "evc": "EVC",
+        "timeline": "Timeline",
+        "communications": "Communications"
+      },
+      "currentStage": "Current stage",
+      "withdraw": "Withdraw Application",
+      "withdrawConfirm": "Withdraw this application? This cannot be undone.",
+      "auditTrail": "Audit Trail",
+      "noDeficiencies": "No deficiencies on this application.",
+      "respondTitle": "Respond to deficiency",
+      "responseLabel": "Your response",
+      "submitResponse": "Submit response",
+      "responseSubmitted": "Response submitted — the stage has resumed.",
+      "documentsPlaceholder": "Document management lands in a later phase.",
+      "evcPlaceholder": "EVC scheduling details land in a later phase.",
+      "communicationsPlaceholder": "Communications history lands in a later phase."
+    }
+  },
+  "deficiency": {
+    "missingDocument": "Missing document",
+    "fireNocExpired": "Fire NOC expired",
+    "landAreaShortfall": "Land area shortfall",
+    "invalidSignature": "Invalid signature",
+    "incompleteFacultyData": "Incomplete faculty data",
+    "other": "Other"
+  },
+  "queue": {
+    "title": "Queue",
+    "empty": "Your queue is empty.",
+    "table": {
+      "appNo": "App No.",
+      "institution": "Institution",
+      "stage": "Stage",
+      "sla": "SLA",
+      "aiFlags": "AI Flags"
+    },
+    "openAction": "Open"
+  },
+  "stageDetail": {
+    "backToQueue": "Back to queue",
+    "allowedActions": "Actions",
+    "actions": {
+      "CLEAR": "Clear Stage & Forward",
+      "RETURN": "Return for Deficiency",
+      "REFER_SENIOR": "Refer to Senior",
+      "REQUEST_CLARIFICATION": "Request Clarification"
+    },
+    "returnModal": {
+      "title": "Return Application",
+      "reasonLabel": "Reason",
+      "deficienciesLabel": "Deficiencies",
+      "addDeficiency": "Add deficiency",
+      "reasonCodeLabel": "Reason code",
+      "customTextLabel": "Details",
+      "letterLabel": "Deficiency letter (editable, AI-drafted)",
+      "send": "Return & Save Letter",
+      "cancel": "Cancel",
+      "maxReturnsWarning": "This application has already reached the maximum number of returns."
+    },
+    "referModal": {
+      "title": "Refer to Senior Officer",
+      "reasonLabel": "Reason",
+      "submit": "Refer",
+      "cancel": "Cancel"
+    },
+    "clarifyModal": {
+      "title": "Request Clarification",
+      "reasonLabel": "Reason",
+      "submit": "Request",
+      "cancel": "Cancel"
+    },
+    "errors": {
+      "GENERIC": "Something went wrong. Please try again.",
+      "REASON_REQUIRED": "A reason is required.",
+      "DEFICIENCY_REQUIRED": "At least one deficiency is required.",
+      "STAGE_NOT_ASSIGNED_TO_YOU": "This case is not assigned to you.",
+      "STAGE_NOT_ACTIVE": "This stage is no longer active."
+    }
   }
 }

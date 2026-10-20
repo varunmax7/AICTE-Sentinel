@@ -1,0 +1,138 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://acp.example.com/contracts/workflow-rule.schema.json",
+  "title": "WorkflowRule.definition",
+  "description": "IMPLEMENTATION.md §9.2 — the JSON shape stored in `workflow_rules.definition`. The authoritative, semantically-checked version of this shape is `app.services.workflow.rules.RuleDefinition` (apps/api); this document is the cross-language contract referenced by that module's docstring, kept in sync by hand until schema codegen covers it.",
+  "type": "object",
+  "required": ["rule_id", "application_type", "academic_year", "version", "stages"],
+  "additionalProperties": false,
+  "properties": {
+    "rule_id": { "type": "string" },
+    "application_type": {
+      "type": "string",
+      "enum": [
+        "NEW_INSTITUTION",
+        "EXTENSION_OF_APPROVAL",
+        "INTAKE_INCREASE",
+        "NEW_COURSE",
+        "CHANGE_OF_NAME",
+        "CHANGE_OF_SITE",
+        "COLLABORATION",
+        "CLOSURE"
+      ]
+    },
+    "academic_year": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}$" },
+    "version": { "type": "integer", "minimum": 1 },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/stage" }
+    },
+    "branches": {
+      "type": "array",
+      "default": [],
+      "items": { "$ref": "#/definitions/branch" }
+    }
+  },
+  "definitions": {
+    "stage": {
+      "type": "object",
+      "required": ["key", "label_key", "kind", "sla_days"],
+      "additionalProperties": false,
+      "properties": {
+        "key": { "type": "string" },
+        "label_key": { "type": "string" },
+        "kind": { "type": "string", "enum": ["SYSTEM", "HUMAN"] },
+        "role": {
+          "type": "string",
+          "enum": [
+            "INSTITUTION",
+            "SCRUTINY_OFFICER",
+            "REGIONAL_OFFICER",
+            "BUREAU_HEAD",
+            "COMMITTEE_MEMBER",
+            "EVC_EXPERT",
+            "ADMIN"
+          ]
+        },
+        "sla_days": { "type": "integer", "minimum": 0 },
+        "sla_calendar": {
+          "type": "string",
+          "enum": ["WORKING_DAYS", "CALENDAR_DAYS"],
+          "default": "CALENDAR_DAYS"
+        },
+        "auto_complete": { "type": "boolean", "default": false },
+        "actions": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "pause_clock_on": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "max_returns": { "type": ["integer", "null"] },
+        "auto_advance_on_clear": { "type": "boolean", "default": false },
+        "escalation_policy": { "type": ["string", "null"] },
+        "sub_steps": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "decisions": { "type": "array", "items": { "type": "string" }, "default": [] },
+        "requires_otp": { "type": "boolean", "default": false }
+      }
+    },
+    "branch": {
+      "type": "object",
+      "required": ["when"],
+      "additionalProperties": false,
+      "properties": {
+        "when": {
+          "type": "string",
+          "description": "A Python boolean expression (`and`/`or`/`==`, not `&&`/`||`) evaluated by app.services.workflow.conditions.evaluate_branch_condition against {application: {payload}, stage}. See docs/DECISIONS.md for why this deviates from this field's illustrative example below."
+        },
+        "skip": { "type": "boolean", "default": false }
+      }
+    }
+  },
+  "examples": [
+    {
+      "rule_id": "NEW_INSTITUTION@2026-27@v1",
+      "application_type": "NEW_INSTITUTION",
+      "academic_year": "2026-27",
+      "version": 1,
+      "stages": [
+        { "key": "AI_PRECHECK", "label_key": "stage.ai_precheck", "kind": "SYSTEM", "sla_days": 0, "auto_complete": true },
+        {
+          "key": "SCRUTINY",
+          "label_key": "stage.scrutiny",
+          "kind": "HUMAN",
+          "role": "SCRUTINY_OFFICER",
+          "sla_days": 15,
+          "sla_calendar": "WORKING_DAYS",
+          "actions": ["CLEAR", "RETURN", "REFER_SENIOR", "REQUEST_CLARIFICATION"],
+          "pause_clock_on": ["RETURN", "REQUEST_CLARIFICATION"],
+          "max_returns": 2,
+          "auto_advance_on_clear": true,
+          "escalation_policy": "STAGE_DEFAULT"
+        },
+        {
+          "key": "EVC",
+          "label_key": "stage.evc",
+          "kind": "HUMAN",
+          "role": "REGIONAL_OFFICER",
+          "sla_days": 30,
+          "sla_calendar": "CALENDAR_DAYS",
+          "sub_steps": ["QUEUED", "PANEL_PROPOSED", "SCHEDULED", "VISITED", "REPORT_SUBMITTED"],
+          "actions": ["SCHEDULE", "RESCHEDULE", "COMPLETE"],
+          "auto_advance_on_clear": true,
+          "escalation_policy": "EVC_DEFAULT"
+        },
+        {
+          "key": "SAC",
+          "label_key": "stage.sac",
+          "kind": "HUMAN",
+          "role": "COMMITTEE_MEMBER",
+          "sla_days": 10,
+          "actions": ["DECIDE"],
+          "decisions": ["APPROVE", "APPROVE_WITH_CONDITIONS", "REJECT", "DEFER"],
+          "requires_otp": true,
+          "escalation_policy": "STAGE_DEFAULT"
+        }
+      ],
+      "branches": [
+        { "when": "application.payload.is_government == True and stage == 'SAC'", "skip": false }
+      ]
+    }
+  ]
+}

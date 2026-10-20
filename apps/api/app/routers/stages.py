@@ -13,7 +13,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.clock import now
 from app.core.deps import get_current_user, require, user_region_ids
-from app.db.models.deadline import Deadline
 from app.db.models.enums import ActorType, StageStatus, UserRole
 from app.db.models.institution import Institution
 from app.db.models.user import User
@@ -23,12 +22,10 @@ from app.db.models.workflow import (
     Deficiency,
     DeficiencyLetter,
     StageInstance,
-    WorkflowRule,
 )
 from app.db.session import get_db
 from app.routers.applications import WORKFLOW_ERROR_STATUS
 from app.schemas.workflow import (
-    DeadlineOut,
     DeficiencyLetterDraftRequest,
     DeficiencyLetterOut,
     DeficiencyLetterUpdateRequest,
@@ -42,7 +39,7 @@ from app.services.events import emit_event, trigger_publish
 from app.services.workflow.assignment import assign
 from app.services.workflow.engine import WorkflowError, perform_action
 from app.services.workflow.letters import render_deficiency_letter_stub
-from app.services.workflow.rules import validate_rule_definition
+from app.services.workflow.presenters import stage_instance_out
 from app.services.workflow.scope import institution_in_scope
 
 router = APIRouter(tags=["stages"])
@@ -53,47 +50,6 @@ OFFICER_ROLES = (
     UserRole.COMMITTEE_MEMBER,
     UserRole.EVC_EXPERT,
 )
-
-
-async def _stage_out(db: AsyncSession, stage: StageInstance) -> StageInstanceOut:
-    application = await db.get(Application, stage.application_id)
-    assert application is not None
-    institution = await db.get(Institution, application.institution_id)
-    assert institution is not None
-
-    allowed_actions: list[str] = []
-    if stage.status == StageStatus.ACTIVE and application.rule_id is not None:
-        rule_row = await db.get(WorkflowRule, application.rule_id)
-        if rule_row is not None:
-            rule = validate_rule_definition(rule_row.definition)
-            allowed_actions = rule.stage(stage.stage_key).actions
-
-    deadline_out = None
-    if stage.deadline_id is not None:
-        deadline = await db.get(Deadline, stage.deadline_id)
-        if deadline is not None:
-            deadline_out = DeadlineOut(
-                id=str(deadline.id),
-                due_at=deadline.due_at,
-                status=deadline.status,
-                owner_party=deadline.owner_party.value,
-            )
-
-    return StageInstanceOut(
-        id=str(stage.id),
-        application_id=str(application.id),
-        app_no=application.app_no,
-        institution_name=institution.name,
-        stage_key=stage.stage_key,
-        seq=stage.seq,
-        status=stage.status,
-        activated_at=stage.activated_at,
-        completed_at=stage.completed_at,
-        returns_count=stage.returns_count,
-        assigned_user_id=str(stage.assigned_user_id) if stage.assigned_user_id else None,
-        deadline=deadline_out,
-        allowed_actions=allowed_actions,
-    )
 
 
 async def _get_scoped_stage(db: AsyncSession, user: User, stage_id: uuid.UUID) -> StageInstance:
@@ -116,7 +72,7 @@ async def get_queue(
         )
     )
     stages = list(result.scalars())
-    outs = [await _stage_out(db, s) for s in stages]
+    outs = [await stage_instance_out(db, s) for s in stages]
     outs.sort(key=lambda o: o.deadline.due_at if o.deadline else now())
     return outs
 
@@ -126,7 +82,7 @@ async def get_stage(
     stage_id: uuid.UUID, user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)
 ) -> StageInstanceOut:
     stage = await _get_scoped_stage(db, user, stage_id)
-    return await _stage_out(db, stage)
+    return await stage_instance_out(db, stage)
 
 
 @router.post("/stages/{stage_id}/actions", response_model=StageInstanceOut)
@@ -152,7 +108,7 @@ async def perform_stage_action(
             WORKFLOW_ERROR_STATUS.get(exc.code, status.HTTP_400_BAD_REQUEST),
             detail={"code": exc.code, "params": exc.params},
         ) from exc
-    return await _stage_out(db, stage)
+    return await stage_instance_out(db, stage)
 
 
 @router.get("/stages/{stage_id}/deficiencies", response_model=list[DeficiencyOut])
@@ -331,4 +287,4 @@ async def reassign_assignment(
     await db.commit()
     trigger_publish()
     await db.refresh(stage)
-    return await _stage_out(db, stage)
+    return await stage_instance_out(db, stage)

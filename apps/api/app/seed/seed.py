@@ -18,12 +18,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.security import encrypt_field, hash_identifier
 from app.db.base import Base
-from app.db.models import geo, institution, user  # noqa: F401 - registers tables
+from app.db.models import geo, institution, user, workflow  # noqa: F401 - registers tables
 from app.db.models.enums import UNSCOPED_ROLES, InstitutionType, UserRole
 from app.db.models.geo import Region, State
 from app.db.models.institution import Institution
 from app.db.models.user import User, UserRegion
 from app.db.session import SessionLocal, engine
+from app.seed.workflow_seed import seed_workflow
 
 DEMO_OTP_NOTE = "123456 (DEMO_MODE fixed OTP)"
 
@@ -131,8 +132,9 @@ async def seed() -> None:
         state = await _get_or_create_state(db, code="TG", name="Telangana", region_id=region.id)
         inst = await _get_or_create_institution(db, state=state, region=region)
 
+        users_by_role: dict[UserRole, User] = {}
         for role, name, phone in DEMO_USERS:
-            await _get_or_create_user(
+            users_by_role[role] = await _get_or_create_user(
                 db,
                 role=role,
                 name=name,
@@ -142,6 +144,8 @@ async def seed() -> None:
             )
 
         await db.commit()
+
+        await seed_workflow(db, institution=inst, users_by_role=users_by_role)
 
     print("Seed complete.\n")
     print(f"{'Role':<20} {'Phone':<18} OTP")

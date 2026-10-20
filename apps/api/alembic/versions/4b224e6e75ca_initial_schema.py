@@ -187,3 +187,15 @@ def downgrade() -> None:
     op.drop_table('otp_audit')
     op.drop_table('audit_events')
     # ### end Alembic commands ###
+    # Not auto-generated: see the matching note in the Phase P2 migration
+    # (0540a49aec60) — dropping a table whose column used `sa.Enum(...)`
+    # does not drop the Postgres enum TYPE it created, so re-running
+    # `upgrade` after this `downgrade` hits "type already exists" without
+    # these. Found by hitting exactly that while testing the P2 migration.
+    bind = op.get_bind()
+    sa.Enum(name='otp_status').drop(bind, checkfirst=True)
+    sa.Enum(name='otp_purpose').drop(bind, checkfirst=True)
+    sa.Enum(name='theme_pref').drop(bind, checkfirst=True)
+    sa.Enum(name='user_role').drop(bind, checkfirst=True)
+    sa.Enum(name='institution_type').drop(bind, checkfirst=True)
+    sa.Enum(name='actor_type').drop(bind, checkfirst=True)

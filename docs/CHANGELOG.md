@@ -47,3 +47,48 @@ implementation phase (see `IMPLEMENTATION.md` §19/§20).
   `bureau`, `committee`, `admin`) plus a minimal dark-mode EVC expert placeholder.
 - `/dev/components` gallery (dev-only): every component rendered in light + dark side by side.
 - 5 Vitest unit tests (SLA state logic, `StatusChip` i18n rendering).
+
+### Phase P2 — Workflow engine + application lifecycle
+- **Backend**: `application_types`, `workflow_rules`, `applications`, `application_courses`,
+  `stage_instances`, `stage_transitions`, `assignments`, `deficiency_reasons`, `deficiencies`,
+  `deficiency_letters`, `deadlines`, `holidays` SQLAlchemy models + Alembic migration (also fixes
+  a latent enum-type-not-dropped-on-downgrade bug in the P1 migration, found while round-tripping
+  this one).
+- Rule JSON schema (`packages/contracts/workflow-rule.schema.json`) + a Pydantic validator
+  (`app.services.workflow.rules`) that parses/validates `workflow_rules.definition`.
+- Workflow engine (`app.services.workflow.engine`): `route` (creates every stage instance up
+  front, evaluating branch skips once against the submitted payload), `perform_action`
+  (CLEAR/COMPLETE, RETURN, REFER_SENIOR, REQUEST_CLARIFICATION — role/region/assignment checked,
+  one audit + outbox event per transition), `advance` (auto-advance on clear), `resubmit`
+  (reactivates a returned stage, marks responded deficiencies, resumes the deadline). A tiny safe
+  expression evaluator (`simpleeval`-backed) for rule branch conditions.
+- Working-day calculator + holiday calendar (`app.services.workflow.calendar`); generic deadline
+  create/pause/resume/close (`app.services.workflow.deadlines`); workload-balanced auto-assignment
+  with manual reassignment (`app.services.workflow.assignment`); deterministic deficiency-letter
+  template stub standing in for the real AI draft that lands with Document AI.
+- Action-level OTP (`app.services.auth.action_otp`) reusing `otp_audit`'s `ESIGN` purpose, so
+  `POST /applications/{id}/submit` is OTP-gated like the spec requires.
+- Endpoints: `GET /application-types`, `GET/POST /applications`, `GET/PATCH /applications/{id}`,
+  `GET /applications/{id}/stages`, `POST .../precheck` (P3 stub), `POST .../submit/otp` +
+  `POST .../submit`, `POST .../withdraw`, `POST .../resubmit`, `GET .../timeline`,
+  `GET .../communications` (P7 stub); `GET /queue`, `GET/POST /stages/{id}`,
+  `POST /stages/{id}/actions`, the deficiency-letter draft/edit/send trio,
+  `POST /assignments/{id}/reassign`; `GET /institutions/{id}`.
+- Seed: all 7 Phase P2 application types + published v1 rules covering all 5 PS pathways,
+  deficiency reasons, a few national holidays, and 3 demo applications (1 draft, 1 routed to
+  SCRUTINY, 1 auto-advanced to EVC) exercised through the real engine at seed time.
+- 17 new pytest cases: every PS pathway routes correctly, CLEAR auto-advances, RETURN pauses the
+  deadline and drafts a letter, resubmit resumes and re-scrutinizes, the max-returns warning is
+  recorded without blocking, role/region/assignment permission checks reject correctly, the
+  workload balancer distributes across officers, and a full HTTP submit→queue→clear→timeline
+  round trip.
+- **Frontend**: institution `/applications` list, the 8-step `/applications/new` wizard (type →
+  institution → courses & intake → land & building → faculty-import placeholder → document
+  checklist → AI-precheck placeholder → OTP-gated review & submit), `/applications/[id]` detail
+  (horizontal `StageStepper` + Overview/Documents/Deficiencies/EVC/Timeline/Communications tabs,
+  deficiency respond-and-resubmit, withdraw, `Timeline`/`AuditDrawer` wired to the real timeline
+  endpoint); officer `/queue` (table with `SlaBadge`) and `/queue/[stageId]` (stage detail with
+  Clear/Return/Refer/Clarify actions and a Return modal with an AI-drafted, editable deficiency
+  letter).
+- New i18n keys (`applicationType`, `applications`, `deficiency`, `queue`, `stageDetail`) in all
+  6 locales, `pnpm i18n:check` passing.

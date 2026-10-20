@@ -12,6 +12,7 @@ from typing import Any
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import delete, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from app.core import clock
 from app.core.deps import get_current_user, require
@@ -29,6 +30,7 @@ from app.schemas.workflow import (
     ApplicationUpdateRequest,
     PrecheckOut,
     ResubmitRequest,
+    StageInstanceOut,
     SubmitOtpSendOut,
     SubmitRequest,
     TimelineEntryOut,
@@ -39,6 +41,7 @@ from app.services.events import emit_event, trigger_publish
 from app.services.workflow.deadlines import close_deadline
 from app.services.workflow.engine import WorkflowError, route
 from app.services.workflow.engine import resubmit as engine_resubmit
+from app.services.workflow.presenters import stage_instance_out
 from app.services.workflow.rules import resolve_published_rule
 from app.services.workflow.scope import institution_in_scope, scoped_region_ids
 
@@ -109,7 +112,7 @@ async def list_applications(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ) -> list[ApplicationOut]:
-    query = select(Application)
+    query = select(Application).options(selectinload(Application.courses))
     if user.role == UserRole.INSTITUTION:
         query = query.where(Application.institution_id == user.institution_id)
     else:
@@ -158,6 +161,25 @@ async def get_application(
     application = await _get_scoped_application(db, user, application_id)
     await db.refresh(application, attribute_names=["courses"])
     return _to_out(application)
+
+
+@router.get("/applications/{application_id}/stages", response_model=list[StageInstanceOut])
+async def get_application_stages(
+    application_id: uuid.UUID,
+    user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+) -> list[StageInstanceOut]:
+    """Backs the application-detail horizontal stepper (§15.2) — not an
+    endpoint named explicitly in §13.2, but the natural sub-resource for it.
+    """
+
+    application = await _get_scoped_application(db, user, application_id)
+    result = await db.execute(
+        select(StageInstance)
+        .where(StageInstance.application_id == application.id)
+        .order_by(StageInstance.seq)
+    )
+    return [await stage_instance_out(db, s) for s in result.scalars()]
 
 
 @router.patch("/applications/{application_id}", response_model=ApplicationOut)

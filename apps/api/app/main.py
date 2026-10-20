@@ -12,7 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import get_settings
 from app.core.errors import install_error_handlers
-from app.routers import application_types, applications, auth, clock, me, sse, stages
+from app.routers import application_types, applications, auth, clock, institutions, me, sse, stages
 
 settings = get_settings()
 
@@ -38,6 +38,7 @@ app.include_router(sse.router, prefix="/api/v1")
 app.include_router(application_types.router, prefix="/api/v1")
 app.include_router(applications.router, prefix="/api/v1")
 app.include_router(stages.router, prefix="/api/v1")
+app.include_router(institutions.router, prefix="/api/v1")
 
 
 @app.get("/api/v1/health")
