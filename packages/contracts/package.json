@@ -1,0 +1,12 @@
+{
+  "name": "@aicte-acp/contracts",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Shared OpenAPI spec, JSON schemas, and generated TS client for the AICTE ACP monorepo",
+  "scripts": {
+    "gen": "node ./scripts/generate-ts-client.mjs"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7"
+  }
+}

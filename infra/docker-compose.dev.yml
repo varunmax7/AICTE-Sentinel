@@ -1,0 +1,38 @@
+# Dev overrides: live reload via bind mounts. Usage:
+#   docker compose -f infra/docker-compose.yml -f infra/docker-compose.dev.yml up
+name: aicte-acp
+
+services:
+  api:
+    command: ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    volumes:
+      - ../apps/api:/app
+    ports:
+      - "8000:8000"
+
+  worker:
+    volumes:
+      - ../apps/api:/app
+
+  beat:
+    volumes:
+      - ../apps/api:/app
+
+  voice:
+    command: ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8010", "--reload"]
+    volumes:
+      - ../apps/voice:/app
+
+  web:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+      target: dev
+    command: ["pnpm", "--filter", "web", "dev"]
+    volumes:
+      - ../apps/web:/app/apps/web
+      - /app/apps/web/node_modules
+      - /app/apps/web/.next
+      - /app/node_modules
+    environment:
+      WATCHPACK_POLLING: "true"

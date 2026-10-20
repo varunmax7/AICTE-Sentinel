@@ -1,0 +1,110 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  PNPM_VERSION: "10.34.5"
+
+jobs:
+  web:
+    name: web (lint, typecheck, test)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Lint
+        run: pnpm turbo run lint --filter=web
+
+      - name: Typecheck
+        run: pnpm turbo run typecheck --filter=web
+
+      - name: Unit tests
+        run: pnpm turbo run test --filter=web
+
+      - name: i18n check
+        run: pnpm i18n:check
+
+  api-and-voice:
+    name: "${{ matrix.app }} (lint, typecheck, test)"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [api, voice]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.12.4"
+
+      - name: Install dependencies
+        working-directory: apps/${{ matrix.app }}
+        run: uv sync
+
+      - name: Lint (ruff)
+        working-directory: apps/${{ matrix.app }}
+        run: uv run ruff check .
+
+      - name: Typecheck (mypy)
+        working-directory: apps/${{ matrix.app }}
+        run: uv run mypy app
+
+      - name: Unit tests (pytest)
+        working-directory: apps/${{ matrix.app }}
+        run: uv run pytest -q
+
+  contracts:
+    name: Export OpenAPI + generate TS client
+    runs-on: ubuntu-latest
+    needs: [api-and-voice]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - uses: astral-sh/setup-uv@v4
+        with:
+          version: "0.12.4"
+
+      - name: Install JS dependencies
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Install API dependencies
+        working-directory: apps/api
+        run: uv sync
+
+      - name: Export OpenAPI schema
+        run: pnpm contracts:export
+
+      - name: Generate TS client
+        run: pnpm contracts:gen
+
+      - name: Upload contracts artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: contracts
+          path: |
+            packages/contracts/openapi.json
+            packages/contracts/ts/

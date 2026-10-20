@@ -1,0 +1,33 @@
+{
+  "name": "aicte-acp",
+  "private": true,
+  "version": "0.0.0",
+  "description": "AICTE Approval & Compliance Portal (ACP) — monorepo root",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@10.34.5",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "i18n:check": "pnpm --filter web run i18n:check",
+    "i18n:translate": "pnpm --filter web run i18n:translate",
+    "seed": "cd apps/api && uv run python -m app.seed",
+    "tunnel": "bash infra/scripts/tunnel.sh",
+    "contracts:export": "bash infra/scripts/export-openapi.sh",
+    "contracts:gen": "pnpm --filter @aicte-acp/contracts run gen"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
+}

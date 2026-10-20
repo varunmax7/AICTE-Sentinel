@@ -1,0 +1,30 @@
+# Local/dev defaults (plain HTTP on :80 via docker-compose port mapping).
+# For production (IMPLEMENTATION.md §23), replace the three hosts below with
+# real domains (acp.<domain>, api.acp.<domain>, voice.acp.<domain>) — Caddy
+# will then auto-provision HTTPS certs for them instead of serving plain HTTP.
+
+:80 {
+	# Core API + webhooks
+	handle /api/* {
+		reverse_proxy api:8000
+	}
+
+	# Voice service (Twilio TwiML + ConversationRelay WebSocket)
+	handle /voice/* {
+		reverse_proxy voice:8010
+	}
+
+	# Everything else -> the Next.js web app
+	handle {
+		reverse_proxy web:3000
+	}
+
+	encode gzip zstd
+	header {
+		# IMPLEMENTATION.md §17 security headers
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "same-origin"
+	}
+}
