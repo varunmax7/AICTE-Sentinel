@@ -5,14 +5,18 @@ import { useEffect, useState } from "react";
 
 import { AuditDrawer } from "@/components/common/audit-drawer";
 import { Timeline, type TimelineEntry } from "@/components/common/timeline";
+import { AiCheckList } from "@/components/documents/ai-panel";
 import { StatusChip } from "@/components/status/status-chip";
 import { Button } from "@/components/ui/button";
 import {
   ApiError,
+  type AiReportOut,
   type ApplicationOut,
   type DeficiencyOut,
+  type DocumentOut,
   type StageInstanceOut,
   type TimelineEntryOut,
+  documentAssetUrl,
   getStageDeficiencies,
   resubmitApplication,
   withdrawApplication,
@@ -32,6 +36,14 @@ const REASON_CODE_KEY: Record<string, string> = {
   OTHER: "other",
 };
 
+const DOCUMENT_TYPE_KEY: Record<string, string> = {
+  LEASE_DEED: "leaseDeed",
+  BUILDING_PLAN_APPROVAL: "buildingPlanApproval",
+  FIRE_NOC: "fireNoc",
+  AFFIDAVIT: "affidavit",
+  FACULTY_LIST: "facultyList",
+};
+
 function toTimelineEntries(entries: TimelineEntryOut[]): TimelineEntry[] {
   return entries.map((e) => ({ id: e.id, actor: e.actor, action: e.action, at: e.at, channel: e.channel ?? undefined }));
 }
@@ -40,14 +52,19 @@ export function ApplicationDetail({
   application: initialApplication,
   stages,
   timeline,
+  documents,
+  aiReport,
 }: {
   application: ApplicationOut;
   stages: StageInstanceOut[];
   timeline: TimelineEntryOut[];
+  documents: DocumentOut[];
+  aiReport: AiReportOut | null;
 }) {
   const t = useTranslations("applications.detail");
   const tType = useTranslations("applicationType");
   const tDeficiency = useTranslations("deficiency");
+  const tDocType = useTranslations("documentType");
 
   const [application, setApplication] = useState(initialApplication);
   const [tab, setTab] = useState<Tab>("overview");
@@ -165,7 +182,55 @@ export function ApplicationDetail({
           </dl>
         )}
 
-        {tab === "documents" && <p className="text-sm text-muted">{t("documentsPlaceholder")}</p>}
+        {tab === "documents" && (
+          <div className="max-w-2xl space-y-4">
+            {documents.length === 0 ? (
+              <p className="text-sm text-muted">{t("documentsPlaceholder")}</p>
+            ) : (
+              <ul className="space-y-2">
+                {documents.map((doc) => (
+                  <li key={doc.id} className="flex items-center gap-3 rounded-lg border border-border p-3">
+                    {doc.preview_url && (
+                      // eslint-disable-next-line @next/next/no-img-element -- backend-streamed, not a Next static asset
+                      <img
+                        src={documentAssetUrl(doc.preview_url)}
+                        alt=""
+                        className="size-12 shrink-0 rounded border border-border object-cover"
+                      />
+                    )}
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-text">
+                        {tDocType(DOCUMENT_TYPE_KEY[doc.document_type] ?? doc.document_type)}
+                      </p>
+                      {doc.extraction && (
+                        <p className="text-xs text-muted">
+                          {t("documentConfidence", { confidence: Math.round(doc.extraction.confidence) })}
+                        </p>
+                      )}
+                    </div>
+                    <StatusChip
+                      status={doc.verified_status === "VERIFIED" ? "COMPLETED" : doc.verified_status === "REJECTED" ? "REJECTED" : "PENDING"}
+                    />
+                    <a
+                      href={documentAssetUrl(doc.download_url)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs font-medium text-primary hover:underline"
+                    >
+                      {t("viewDocument")}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {aiReport && aiReport.checks.length > 0 && (
+              <div>
+                <h2 className="mb-2 text-sm font-semibold text-text">{t("aiPreScrutiny")}</h2>
+                <AiCheckList checks={aiReport.checks} />
+              </div>
+            )}
+          </div>
+        )}
 
         {tab === "deficiencies" && (
           <div className="max-w-md space-y-4">

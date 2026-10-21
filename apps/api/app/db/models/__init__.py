@@ -5,6 +5,7 @@ autogenerate and for `Base.metadata.create_all` in tests.
 from app.db.models import (  # noqa: F401
     audit,
     deadline,
+    documents,
     geo,
     institution,
     otp,
@@ -16,6 +17,7 @@ from app.db.models import (  # noqa: F401
 __all__ = [
     "audit",
     "deadline",
+    "documents",
     "geo",
     "institution",
     "otp",

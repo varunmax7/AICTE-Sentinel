@@ -132,3 +132,45 @@ class DeadlineOwnerParty(enum.StrEnum):
 
     OFFICER = "OFFICER"
     INSTITUTION = "INSTITUTION"
+
+
+class DocumentSource(enum.StrEnum):
+    """IMPLEMENTATION.md §21. Only `PORTAL` is wired in Phase P3 — the other
+    three channels light up alongside the matching Phase P7 inbound adapter
+    (email/WhatsApp) or P6 upload-link flow.
+    """
+
+    PORTAL = "PORTAL"
+    EMAIL = "EMAIL"
+    WHATSAPP = "WHATSAPP"
+    LINK = "LINK"
+
+
+class DocumentVerifiedStatus(enum.StrEnum):
+    UNVERIFIED = "UNVERIFIED"
+    VERIFIED = "VERIFIED"
+    REJECTED = "REJECTED"
+
+
+class ExtractionStatus(enum.StrEnum):
+    PENDING = "PENDING"
+    DONE = "DONE"
+    FAILED = "FAILED"
+
+
+class AiCheckStatus(enum.StrEnum):
+    PASS = "PASS"
+    WARN = "WARN"
+    FAIL = "FAIL"
+
+
+class AiFlagSeverity(enum.StrEnum):
+    LOW = "LOW"
+    MED = "MED"
+    HIGH = "HIGH"
+
+
+class AiFlagStatus(enum.StrEnum):
+    OPEN = "OPEN"
+    DISMISSED = "DISMISSED"
+    CONFIRMED = "CONFIRMED"

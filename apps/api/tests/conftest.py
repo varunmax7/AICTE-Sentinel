@@ -7,6 +7,7 @@ from app.core.redis_client import get_redis
 from app.db.base import Base
 from app.db.session import engine
 from app.main import app
+from app.services.storage import ensure_bucket
 
 
 @pytest_asyncio.fixture(autouse=True)
@@ -17,6 +18,10 @@ async def _clean_state() -> AsyncGenerator[None, None]:
     # This points at local dev Redis (see docs/DECISIONS.md) — flushing it is
     # fine for a test/dev sandbox but would not be in a shared environment.
     get_redis().flushdb()
+    # Same for local MinIO (Phase P3): ensures the bucket exists; objects are
+    # uniquely keyed per upload (see `app.services.docai.pipeline.new_s3_key`)
+    # so there's no cross-test collision to clean up.
+    ensure_bucket()
     yield
 
 

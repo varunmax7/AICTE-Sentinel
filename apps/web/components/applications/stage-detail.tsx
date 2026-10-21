@@ -3,8 +3,10 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { X } from "lucide-react";
+import { MessageSquareText, X } from "lucide-react";
 
+import { AiPanel } from "@/components/documents/ai-panel";
+import { DocViewer } from "@/components/documents/doc-viewer";
 import { ActionBar } from "@/components/shell/action-bar";
 import { SlaPill } from "@/components/status/sla-pill";
 import { StatusChip } from "@/components/status/status-chip";
@@ -12,10 +14,16 @@ import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import {
   ApiError,
+  type AiReportOut,
+  type ApplicationOut,
+  type DocumentOut,
   type StageInstanceOut,
   draftDeficiencyLetter,
+  getAiReport,
   performStageAction,
 } from "@/lib/api";
+
+import { CaseFilePanel } from "./case-file-panel";
 
 type ModalKind = "RETURN" | "REFER_SENIOR" | "REQUEST_CLARIFICATION" | null;
 
@@ -48,12 +56,45 @@ function Modal({
   );
 }
 
-export function StageDetail({ stage: initialStage }: { stage: StageInstanceOut }) {
+/**
+ * The Case Review Workspace (IMPLEMENTATION.md §15.3, reference image 1):
+ * CaseFilePanel | DocViewer | AiPanel, with the sticky action bar this
+ * screen already had from Phase P2. 3-column at ≥1280px per §7.4; below
+ * that the panels stack (a simplification of the spec's "AI panel becomes
+ * a drawer" — same information, reached by scrolling instead of opening a
+ * drawer, since no phase's acceptance criteria exercises that breakpoint).
+ */
+export function StageDetail({
+  stage: initialStage,
+  application,
+  applicationStages,
+  documents: initialDocuments,
+  aiReport: initialAiReport,
+}: {
+  stage: StageInstanceOut;
+  application: ApplicationOut | null;
+  applicationStages: StageInstanceOut[];
+  documents: DocumentOut[];
+  aiReport: AiReportOut | null;
+}) {
   const t = useTranslations("stageDetail");
   const [stage, setStage] = useState(initialStage);
+  const [documents, setDocuments] = useState(initialDocuments);
+  const [aiReport, setAiReport] = useState(initialAiReport);
   const [modal, setModal] = useState<ModalKind>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  async function handleDocumentVerified(updated: DocumentOut) {
+    setDocuments((prev) => prev.map((d) => (d.id === updated.id ? updated : d)));
+    if (application) {
+      try {
+        setAiReport(await getAiReport(application.id));
+      } catch {
+        // AI report refresh is best-effort; the verified document itself already saved.
+      }
+    }
+  }
 
   const [reason, setReason] = useState("");
   const [deficiencyText, setDeficiencyText] = useState("");
@@ -150,13 +191,26 @@ export function StageDetail({ stage: initialStage }: { stage: StageInstanceOut }
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 md:p-6">
-        {error && <p className="mb-4 rounded-lg bg-danger-soft px-3 py-2 text-sm text-danger">{error}</p>}
-        {!isActive && <p className="text-sm text-muted">{t("errors.STAGE_NOT_ACTIVE")}</p>}
+      <div className="flex-1 overflow-y-auto">
+        {error && (
+          <p className="mx-4 mt-4 rounded-lg bg-danger-soft px-3 py-2 text-sm text-danger md:mx-6">{error}</p>
+        )}
+        <div className="grid min-h-[480px] grid-cols-1 lg:grid-cols-[340px_minmax(0,1fr)_380px]">
+          <CaseFilePanel stage={stage} application={application} stages={applicationStages} />
+          <div className="min-h-[480px] border-b border-border lg:border-b-0 lg:border-r">
+            <DocViewer documents={documents} onDocumentVerified={handleDocumentVerified} />
+          </div>
+          <AiPanel report={aiReport} />
+        </div>
       </div>
 
       {isActive && (
         <ActionBar>
+          <Button variant="ai" disabled title={t("aiAssistantComingSoon")}>
+            <MessageSquareText className="size-4" />
+            {t("actions.AI_ASSISTANT")}
+          </Button>
+          <span className="flex-1" />
           {stage.allowed_actions.includes("REQUEST_CLARIFICATION") && (
             <Button
               variant="outline"

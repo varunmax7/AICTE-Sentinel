@@ -173,14 +173,19 @@
         "importLabel": "Upload faculty roster (.xlsx)"
       },
       "documents": {
-        "checklistNote": "Confirm you have each required document ready. Upload and AI verification of documents land in a later phase.",
+        "checklistNote": "Upload each required document below. AI extraction runs automatically.",
         "haveIt": "I have this ready",
-        "empty": "No documents are required for this application type."
+        "empty": "No documents are required for this application type.",
+        "uploaded": "Uploaded",
+        "uploading": "Uploading…",
+        "extractedConfidence": "AI extraction confidence: {confidence}%"
       },
       "precheck": {
         "pendingTitle": "AI pre-check",
-        "pendingNote": "AI pre-check is not available yet — it lands in a later phase. You may proceed to review and submit.",
-        "run": "Run pre-check"
+        "pendingNote": "Runs AI extraction and validation on your uploaded documents.",
+        "run": "Run pre-check",
+        "fixDocuments": "Fix documents",
+        "noChecksYet": "No checks yet — upload documents first."
       },
       "review": {
         "title": "Review & Submit",
@@ -215,9 +220,12 @@
       "responseLabel": "Your response",
       "submitResponse": "Submit response",
       "responseSubmitted": "Response submitted — the stage has resumed.",
-      "documentsPlaceholder": "Document management lands in a later phase.",
+      "documentsPlaceholder": "No documents uploaded yet.",
       "evcPlaceholder": "EVC scheduling details land in a later phase.",
-      "communicationsPlaceholder": "Communications history lands in a later phase."
+      "communicationsPlaceholder": "Communications history lands in a later phase.",
+      "documentConfidence": "AI extraction confidence: {confidence}%",
+      "viewDocument": "View",
+      "aiPreScrutiny": "AI Pre-Scrutiny"
     }
   },
   "deficiency": {
@@ -247,7 +255,8 @@
       "CLEAR": "Clear Stage & Forward",
       "RETURN": "Return for Deficiency",
       "REFER_SENIOR": "Refer to Senior",
-      "REQUEST_CLARIFICATION": "Request Clarification"
+      "REQUEST_CLARIFICATION": "Request Clarification",
+      "AI_ASSISTANT": "AI Assistant Chat"
     },
     "returnModal": {
       "title": "Return Application",
@@ -279,6 +288,70 @@
       "DEFICIENCY_REQUIRED": "At least one deficiency is required.",
       "STAGE_NOT_ASSIGNED_TO_YOU": "This case is not assigned to you.",
       "STAGE_NOT_ACTIVE": "This stage is no longer active."
+    },
+    "aiAssistantComingSoon": "Coming in a later phase"
+  },
+  "caseReview": {
+    "caseFile": {
+      "stages": "Stages",
+      "keyFacts": "Key Facts",
+      "academicYear": "Academic Year",
+      "courses": "Courses",
+      "landArea": "Land Area (acres)"
+    },
+    "docViewer": {
+      "pageOf": "Page {page} of {total}",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "rotate": "Rotate",
+      "noPreview": "Preview not available yet.",
+      "noDocuments": "No documents uploaded yet.",
+      "aiOcrVerified": "AI OCR: verified",
+      "compare": "Compare Side-by-Side"
+    },
+    "extractedFields": {
+      "title": "Extracted Fields",
+      "verified": "Verified",
+      "saveVerification": "Save Verification",
+      "saveError": "Could not save verification. Please try again."
     }
+  },
+  "aiCheck": {
+    "preScrutinyConfidence": "AI Pre-Scrutiny Confidence",
+    "noReport": "AI pre-scrutiny report not available yet.",
+    "noChecksYet": "No checks have run yet — upload documents to generate the AI pre-scrutiny report.",
+    "titles": {
+      "landAreaNorms": "Land Area Norms",
+      "stampDuty": "Stamp Duty Sanity",
+      "documentValidity": "Document Validity",
+      "infrastructure": "Infrastructure Verification",
+      "duplicateFaculty": "Duplicate Faculty Check"
+    },
+    "landAreaNorms": {
+      "result": "{extracted} acres vs required {required} acres",
+      "noData": "Land area could not be extracted yet."
+    },
+    "stampDuty": {
+      "result": "₹{amount} paid — expected at least ₹{expectedMin}",
+      "noData": "Stamp duty could not be extracted yet."
+    },
+    "documentValidity": {
+      "result": "Valid until {expiry} (required until {requiredUntil})",
+      "noData": "Document validity could not be determined yet."
+    },
+    "infrastructure": {
+      "result": "{completePct}% of required documents uploaded",
+      "missing": "missing: {items}"
+    },
+    "duplicateFaculty": {
+      "result": "No duplicate faculty records found"
+    }
+  },
+  "documentType": {
+    "leaseDeed": "Lease Deed",
+    "buildingPlanApproval": "Building Plan Approval",
+    "fireNoc": "Fire NOC",
+    "affidavit": "Affidavit",
+    "facultyList": "Faculty List"
   }
 }

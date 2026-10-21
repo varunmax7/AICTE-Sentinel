@@ -19,8 +19,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.core.clock import now
 from app.core.deps import user_region_ids
 from app.db.models.deadline import Deadline
+from app.db.models.documents import AiCheck
 from app.db.models.enums import (
     ActorType,
+    AiCheckStatus,
     ApplicationStatus,
     DeadlineOwnerParty,
     DeficiencyStatus,
@@ -42,7 +44,7 @@ from app.services.workflow.assignment import assign, pick_assignee
 from app.services.workflow.calendar import due_at_for_sla
 from app.services.workflow.conditions import evaluate_branch_condition
 from app.services.workflow.deadlines import close_deadline, pause_deadline, resume_deadline
-from app.services.workflow.letters import render_deficiency_letter_stub
+from app.services.workflow.letters import draft_deficiency_letter_body
 from app.services.workflow.rules import RuleDefinition, StageDef, validate_rule_definition
 
 
@@ -378,12 +380,23 @@ async def perform_action(
                 )
             )
 
-        letter_body = letter_body_md or render_deficiency_letter_stub(
-            institution_name=institution.name,
-            app_no=application.app_no,
-            reason=reason,
-            deficiencies=[d.get("custom_text") or d.get("reason_code") or "" for d in deficiencies],
-        )
+        if letter_body_md:
+            letter_body = letter_body_md
+        else:
+            failed_checks_result = await db.execute(
+                select(AiCheck.message_key).where(
+                    AiCheck.application_id == application.id, AiCheck.status != AiCheckStatus.PASS
+                )
+            )
+            letter_body = await draft_deficiency_letter_body(
+                institution_name=institution.name,
+                app_no=application.app_no,
+                reason=reason,
+                deficiencies=[
+                    d.get("custom_text") or d.get("reason_code") or "" for d in deficiencies
+                ],
+                failed_checks=list(failed_checks_result.scalars()),
+            )
         db.add(
             DeficiencyLetter(
                 stage_instance_id=stage_instance.id,

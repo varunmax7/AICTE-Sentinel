@@ -24,6 +24,7 @@ from app.db.models.geo import Region, State
 from app.db.models.institution import Institution
 from app.db.models.user import User, UserRegion
 from app.db.session import SessionLocal, engine
+from app.seed.docai_seed import seed_hero_case
 from app.seed.workflow_seed import seed_workflow
 
 DEMO_OTP_NOTE = "123456 (DEMO_MODE fixed OTP)"
@@ -146,6 +147,9 @@ async def seed() -> None:
         await db.commit()
 
         await seed_workflow(db, institution=inst, users_by_role=users_by_role)
+        await seed_hero_case(
+            db, institution=inst, institution_user=users_by_role[UserRole.INSTITUTION]
+        )
 
     print("Seed complete.\n")
     print(f"{'Role':<20} {'Phone':<18} OTP")

@@ -173,14 +173,19 @@
         "importLabel": "संकाय सूची अपलोड करें (.xlsx)"
       },
       "documents": {
-        "checklistNote": "कृपया पुष्टि करें कि आपके पास प्रत्येक आवश्यक दस्तावेज़ तैयार है। दस्तावेज़ अपलोड और AI सत्यापन बाद के चरण में उपलब्ध होंगे।",
+        "checklistNote": "नीचे प्रत्येक आवश्यक दस्तावेज़ अपलोड करें। AI निष्कर्षण स्वचालित रूप से चलता है।",
         "haveIt": "यह मेरे पास तैयार है",
-        "empty": "इस आवेदन प्रकार के लिए कोई दस्तावेज़ आवश्यक नहीं है।"
+        "empty": "इस आवेदन प्रकार के लिए कोई दस्तावेज़ आवश्यक नहीं है।",
+        "uploaded": "अपलोड किया गया",
+        "uploading": "अपलोड हो रहा है…",
+        "extractedConfidence": "AI निष्कर्षण विश्वास: {confidence}%"
       },
       "precheck": {
         "pendingTitle": "AI पूर्व-जाँच",
-        "pendingNote": "AI पूर्व-जाँच अभी उपलब्ध नहीं है — यह बाद के चरण में जोड़ी जाएगी। आप समीक्षा और प्रस्तुतीकरण के लिए आगे बढ़ सकते हैं।",
-        "run": "पूर्व-जाँच चलाएं"
+        "pendingNote": "आपके अपलोड किए गए दस्तावेज़ों पर AI निष्कर्षण और सत्यापन चलाता है।",
+        "run": "पूर्व-जाँच चलाएं",
+        "fixDocuments": "दस्तावेज़ ठीक करें",
+        "noChecksYet": "अभी तक कोई जाँच नहीं — पहले दस्तावेज़ अपलोड करें।"
       },
       "review": {
         "title": "समीक्षा और प्रस्तुतीकरण",
@@ -215,9 +220,12 @@
       "responseLabel": "आपका जवाब",
       "submitResponse": "जवाब प्रस्तुत करें",
       "responseSubmitted": "जवाब प्रस्तुत किया गया — चरण पुनः सक्रिय हो गया है।",
-      "documentsPlaceholder": "दस्तावेज़ प्रबंधन बाद के चरण में जोड़ा जाएगा।",
+      "documentsPlaceholder": "अभी तक कोई दस्तावेज़ अपलोड नहीं किया गया।",
       "evcPlaceholder": "EVC शेड्यूलिंग विवरण बाद के चरण में जोड़ा जाएगा।",
-      "communicationsPlaceholder": "संचार इतिहास बाद के चरण में जोड़ा जाएगा।"
+      "communicationsPlaceholder": "संचार इतिहास बाद के चरण में जोड़ा जाएगा।",
+      "documentConfidence": "AI निष्कर्षण विश्वास: {confidence}%",
+      "viewDocument": "देखें",
+      "aiPreScrutiny": "AI पूर्व-संवीक्षा"
     }
   },
   "deficiency": {
@@ -247,7 +255,8 @@
       "CLEAR": "चरण स्वीकृत करें और आगे भेजें",
       "RETURN": "कमी के लिए वापस करें",
       "REFER_SENIOR": "वरिष्ठ को संदर्भित करें",
-      "REQUEST_CLARIFICATION": "स्पष्टीकरण मांगें"
+      "REQUEST_CLARIFICATION": "स्पष्टीकरण मांगें",
+      "AI_ASSISTANT": "AI सहायक चैट"
     },
     "returnModal": {
       "title": "आवेदन वापस करें",
@@ -279,6 +288,70 @@
       "DEFICIENCY_REQUIRED": "कम से कम एक कमी आवश्यक है।",
       "STAGE_NOT_ASSIGNED_TO_YOU": "यह केस आपको सौंपा नहीं गया है।",
       "STAGE_NOT_ACTIVE": "यह चरण अब सक्रिय नहीं है।"
+    },
+    "aiAssistantComingSoon": "यह बाद के चरण में उपलब्ध होगा"
+  },
+  "caseReview": {
+    "caseFile": {
+      "stages": "चरण",
+      "keyFacts": "मुख्य तथ्य",
+      "academicYear": "शैक्षणिक वर्ष",
+      "courses": "पाठ्यक्रम",
+      "landArea": "भूमि क्षेत्र (एकड़)"
+    },
+    "docViewer": {
+      "pageOf": "पृष्ठ {page} / {total}",
+      "zoomIn": "ज़ूम इन",
+      "zoomOut": "ज़ूम आउट",
+      "rotate": "घुमाएं",
+      "noPreview": "पूर्वावलोकन अभी उपलब्ध नहीं है।",
+      "noDocuments": "अभी तक कोई दस्तावेज़ अपलोड नहीं किया गया।",
+      "aiOcrVerified": "AI OCR: सत्यापित",
+      "compare": "साथ-साथ तुलना करें"
+    },
+    "extractedFields": {
+      "title": "निकाले गए फ़ील्ड",
+      "verified": "सत्यापित",
+      "saveVerification": "सत्यापन सहेजें",
+      "saveError": "सत्यापन सहेज नहीं सका। कृपया पुनः प्रयास करें।"
     }
+  },
+  "aiCheck": {
+    "preScrutinyConfidence": "AI पूर्व-संवीक्षा विश्वास",
+    "noReport": "AI पूर्व-संवीक्षा रिपोर्ट अभी उपलब्ध नहीं है।",
+    "noChecksYet": "अभी तक कोई जाँच नहीं चली है — AI पूर्व-संवीक्षा रिपोर्ट बनाने के लिए दस्तावेज़ अपलोड करें।",
+    "titles": {
+      "landAreaNorms": "भूमि क्षेत्र मानदंड",
+      "stampDuty": "स्टाम्प शुल्क जाँच",
+      "documentValidity": "दस्तावेज़ वैधता",
+      "infrastructure": "अवसंरचना सत्यापन",
+      "duplicateFaculty": "डुप्लिकेट संकाय जाँच"
+    },
+    "landAreaNorms": {
+      "result": "{extracted} एकड़ बनाम आवश्यक {required} एकड़",
+      "noData": "भूमि क्षेत्र अभी निकाला नहीं जा सका।"
+    },
+    "stampDuty": {
+      "result": "₹{amount} भुगतान किया गया — कम से कम ₹{expectedMin} अपेक्षित",
+      "noData": "स्टाम्प शुल्क अभी निकाला नहीं जा सका।"
+    },
+    "documentValidity": {
+      "result": "{expiry} तक मान्य (आवश्यक {requiredUntil} तक)",
+      "noData": "दस्तावेज़ वैधता अभी निर्धारित नहीं की जा सकी।"
+    },
+    "infrastructure": {
+      "result": "{completePct}% आवश्यक दस्तावेज़ अपलोड किए गए",
+      "missing": "कमी: {items}"
+    },
+    "duplicateFaculty": {
+      "result": "कोई डुप्लिकेट संकाय रिकॉर्ड नहीं मिला"
+    }
+  },
+  "documentType": {
+    "leaseDeed": "लीज़ डीड",
+    "buildingPlanApproval": "भवन योजना अनुमोदन",
+    "fireNoc": "फायर एनओसी",
+    "affidavit": "शपथ पत्र",
+    "facultyList": "संकाय सूची"
   }
 }

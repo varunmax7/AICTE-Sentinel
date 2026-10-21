@@ -38,7 +38,7 @@ from app.services.audit.chain import write_audit_event
 from app.services.events import emit_event, trigger_publish
 from app.services.workflow.assignment import assign
 from app.services.workflow.engine import WorkflowError, perform_action
-from app.services.workflow.letters import render_deficiency_letter_stub
+from app.services.workflow.letters import draft_deficiency_letter_body
 from app.services.workflow.presenters import stage_instance_out
 from app.services.workflow.scope import institution_in_scope
 
@@ -142,7 +142,7 @@ async def draft_deficiency_letter(
     institution = await db.get(Institution, application.institution_id)
     assert institution is not None
 
-    body_md = render_deficiency_letter_stub(
+    body_md = await draft_deficiency_letter_body(
         institution_name=institution.name,
         app_no=application.app_no,
         reason=body.reason,

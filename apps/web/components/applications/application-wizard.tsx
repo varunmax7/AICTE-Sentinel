@@ -3,21 +3,26 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
+import { AiCheckList } from "@/components/documents/ai-panel";
 import { ActionBar } from "@/components/shell/action-bar";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import {
   ApiError,
+  type AiReportOut,
   type ApplicationCourse,
   type ApplicationOut,
   type ApplicationType,
   type ApplicationTypeOut,
+  type DocumentOut,
   type InstitutionOut,
   createApplication,
+  getAiReport,
   precheckApplication,
   sendSubmitOtp,
   submitApplication,
   updateApplication,
+  uploadDocument,
 } from "@/lib/api";
 import { cn } from "@/lib/utils";
 
@@ -57,8 +62,10 @@ export function ApplicationWizard({
   const [requiredDocs, setRequiredDocs] = useState<string[]>([]);
   const [courses, setCourses] = useState<ApplicationCourse[]>([]);
   const [payload, setPayload] = useState<Record<string, unknown>>({});
-  const [documentsChecked, setDocumentsChecked] = useState<Record<string, boolean>>({});
+  const [uploadedDocs, setUploadedDocs] = useState<Record<string, DocumentOut>>({});
+  const [uploadingDoc, setUploadingDoc] = useState<string | null>(null);
   const [precheckRan, setPrecheckRan] = useState(false);
+  const [aiReport, setAiReport] = useState<AiReportOut | null>(null);
 
   const [otpSent, setOtpSent] = useState(false);
   const [otpCode, setOtpCode] = useState("");
@@ -112,11 +119,27 @@ export function ApplicationWizard({
     setCourses((prev) => prev.map((c, i) => (i === index ? { ...c, ...patch } : c)));
   }
 
+  async function handleUploadDocument(documentType: string, file: File) {
+    if (!applicationId) return;
+    setUploadingDoc(documentType);
+    setError(null);
+    try {
+      const doc = await uploadDocument({ applicationId, documentType, file });
+      setUploadedDocs((prev) => ({ ...prev, [documentType]: doc }));
+    } catch (err) {
+      setError(errorMessage(err));
+    } finally {
+      setUploadingDoc(null);
+    }
+  }
+
   async function handleRunPrecheck() {
     if (!applicationId) return;
     setLoading(true);
     try {
       await precheckApplication(applicationId);
+      const report = await getAiReport(applicationId);
+      setAiReport(report);
       setPrecheckRan(true);
     } catch (err) {
       setError(errorMessage(err));
@@ -347,17 +370,36 @@ export function ApplicationWizard({
               <p className="text-sm text-muted">{t("documents.empty")}</p>
             ) : (
               <ul className="space-y-2">
-                {requiredDocs.map((doc) => (
-                  <li key={doc} className="flex items-center gap-2 rounded-lg border border-border p-2.5 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={documentsChecked[doc] ?? false}
-                      onChange={(e) => setDocumentsChecked((prev) => ({ ...prev, [doc]: e.target.checked }))}
-                    />
-                    <span className="text-text">{doc}</span>
-                    <span className="ml-auto text-xs text-muted">{t("documents.haveIt")}</span>
-                  </li>
-                ))}
+                {requiredDocs.map((doc) => {
+                  const uploaded = uploadedDocs[doc];
+                  return (
+                    <li key={doc} className="rounded-lg border border-border p-2.5 text-sm">
+                      <div className="flex items-center justify-between">
+                        <span className="text-text">{doc}</span>
+                        {uploaded ? (
+                          <span className="text-xs font-medium text-success">{t("documents.uploaded")}</span>
+                        ) : uploadingDoc === doc ? (
+                          <span className="text-xs text-muted">{t("documents.uploading")}</span>
+                        ) : null}
+                      </div>
+                      {uploaded?.extraction && (
+                        <p className="mt-1 text-xs text-muted">
+                          {t("documents.extractedConfidence", { confidence: Math.round(uploaded.extraction.confidence) })}
+                        </p>
+                      )}
+                      <input
+                        type="file"
+                        accept="application/pdf"
+                        disabled={uploadingDoc === doc}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) void handleUploadDocument(doc, file);
+                        }}
+                        className="mt-2 w-full text-xs text-muted"
+                      />
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>
@@ -366,10 +408,29 @@ export function ApplicationWizard({
         {step === "precheck" && (
           <div className="max-w-md space-y-3">
             <h2 className="text-sm font-semibold text-text">{t("precheck.pendingTitle")}</h2>
-            <p className="rounded-lg bg-ai-soft px-3 py-2 text-sm text-ai">{t("precheck.pendingNote")}</p>
-            <Button variant="outline" size="sm" onClick={handleRunPrecheck} disabled={loading || precheckRan}>
-              {t("precheck.run")}
-            </Button>
+            {!precheckRan ? (
+              <>
+                <p className="rounded-lg bg-ai-soft px-3 py-2 text-sm text-ai">{t("precheck.pendingNote")}</p>
+                <Button variant="outline" size="sm" onClick={handleRunPrecheck} disabled={loading}>
+                  {t("precheck.run")}
+                </Button>
+              </>
+            ) : aiReport && aiReport.checks.length > 0 ? (
+              <>
+                <AiCheckList checks={aiReport.checks} />
+                {aiReport.checks.some((c) => c.status !== "PASS") && (
+                  <button
+                    type="button"
+                    onClick={() => setStepIndex(STEPS.indexOf("documents"))}
+                    className="text-xs font-medium text-primary hover:underline"
+                  >
+                    {t("precheck.fixDocuments")}
+                  </button>
+                )}
+              </>
+            ) : (
+              <p className="text-sm text-muted">{t("precheck.noChecksYet")}</p>
+            )}
           </div>
         )}
 
@@ -432,10 +493,6 @@ export function ApplicationWizard({
                 if (!applicationId) return;
                 if (step === "courses") await updateApplication(applicationId, { courses });
                 if (step === "landBuilding") await updateApplication(applicationId, { payload });
-                if (step === "documents")
-                  await updateApplication(applicationId, {
-                    payload: { ...payload, documents_checklist: documentsChecked },
-                  });
               })
             }
             disabled={loading}

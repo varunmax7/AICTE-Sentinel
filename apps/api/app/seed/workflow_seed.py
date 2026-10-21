@@ -72,35 +72,41 @@ _PRECHECK_STAGE = {
     "auto_complete": True,
 }
 
-# §9.1 pathway table: application type -> stage list (+ illustrative required docs).
+# §9.1 pathway table: application type -> stage list + required document
+# types. The doc codes match `document_types.code` (Phase P3's
+# `app.services.docai.schemas`) now that table exists — P2 seeded this
+# phase's own placeholder codes before Document AI landed; this is the
+# "required_document_types" these checks actually resolve against, used by
+# `app.services.docai.pipeline.run_application_checks`'s
+# INFRASTRUCTURE_VERIFICATION check.
 _PATHWAYS: dict[ApplicationType, tuple[list[dict[str, object]], list[str]]] = {
     ApplicationType.EXTENSION_OF_APPROVAL: (
         [_PRECHECK_STAGE, _SCRUTINY_STAGE],
-        ["AICTE_APPLICATION_FORM", "AFFILIATION_LETTER"],
+        ["AFFIDAVIT"],
     ),
     ApplicationType.CHANGE_OF_NAME: (
         [_PRECHECK_STAGE, _SCRUTINY_STAGE],
-        ["AICTE_APPLICATION_FORM", "NAME_CHANGE_GAZETTE"],
+        ["AFFIDAVIT"],
     ),
     ApplicationType.INTAKE_INCREASE: (
         [_PRECHECK_STAGE, _SCRUTINY_STAGE, _EVC_STAGE],
-        ["AICTE_APPLICATION_FORM", "FACULTY_LIST", "LAND_DOCUMENTS"],
+        ["FACULTY_LIST", "BUILDING_PLAN_APPROVAL"],
     ),
     ApplicationType.NEW_COURSE: (
         [_PRECHECK_STAGE, _SCRUTINY_STAGE, _EVC_STAGE],
-        ["AICTE_APPLICATION_FORM", "FACULTY_LIST", "CURRICULUM"],
+        ["FACULTY_LIST", "BUILDING_PLAN_APPROVAL"],
     ),
     ApplicationType.CHANGE_OF_SITE: (
         [_PRECHECK_STAGE, _EVC_STAGE, _SAC_STAGE],
-        ["AICTE_APPLICATION_FORM", "LAND_DOCUMENTS", "BUILDING_PLAN_APPROVAL"],
+        ["LEASE_DEED", "BUILDING_PLAN_APPROVAL"],
     ),
     ApplicationType.COLLABORATION: (
         [_PRECHECK_STAGE, _EVC_STAGE],
-        ["AICTE_APPLICATION_FORM", "COLLABORATION_MOU"],
+        ["AFFIDAVIT"],
     ),
     ApplicationType.NEW_INSTITUTION: (
         [_PRECHECK_STAGE, _SCRUTINY_STAGE, _EVC_STAGE, _SAC_STAGE],
-        ["AICTE_APPLICATION_FORM", "LAND_DOCUMENTS", "FIRE_NOC", "BUILDING_PLAN_APPROVAL"],
+        ["LEASE_DEED", "FIRE_NOC", "BUILDING_PLAN_APPROVAL"],
     ),
 }
 

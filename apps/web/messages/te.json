@@ -173,14 +173,19 @@
         "importLabel": "అధ్యాపక వివరాలు అప్‌లోడ్ చేయండి (.xlsx)"
       },
       "documents": {
-        "checklistNote": "ప్రతి అవసరమైన పత్రం సిద్ధంగా ఉందని నిర్ధారించుకోండి. పత్ర అప్‌లోడ్ మరియు AI పరిశీలన తర్వాతి దశలో అందుబాటులోకి వస్తాయి.",
+        "checklistNote": "దిగువ ప్రతి అవసరమైన పత్రాన్ని అప్‌లోడ్ చేయండి. AI వెలికితీత స్వయంచాలకంగా నడుస్తుంది.",
         "haveIt": "ఇది నా వద్ద సిద్ధంగా ఉంది",
-        "empty": "ఈ దరఖాస్తు రకానికి పత్రాలు అవసరం లేదు."
+        "empty": "ఈ దరఖాస్తు రకానికి పత్రాలు అవసరం లేదు.",
+        "uploaded": "అప్‌లోడ్ చేయబడింది",
+        "uploading": "అప్‌లోడ్ చేస్తోంది…",
+        "extractedConfidence": "AI వెలికితీత నమ్మకం: {confidence}%"
       },
       "precheck": {
         "pendingTitle": "AI ముందస్తు పరిశీలన",
-        "pendingNote": "AI ముందస్తు పరిశీలన ఇంకా అందుబాటులో లేదు — ఇది తర్వాతి దశలో వస్తుంది. మీరు సమీక్ష & సమర్పణకు కొనసాగవచ్చు.",
-        "run": "ముందస్తు పరిశీలన నడపండి"
+        "pendingNote": "మీ అప్‌లోడ్ చేసిన పత్రాలపై AI వెలికితీత మరియు ధ్రువీకరణ నడుస్తుంది.",
+        "run": "ముందస్తు పరిశీలన నడపండి",
+        "fixDocuments": "పత్రాలను సరిచేయండి",
+        "noChecksYet": "ఇంకా పరిశీలనలు లేవు — మొదట పత్రాలను అప్‌లోడ్ చేయండి."
       },
       "review": {
         "title": "సమీక్ష & సమర్పణ",
@@ -215,9 +220,12 @@
       "responseLabel": "మీ స్పందన",
       "submitResponse": "స్పందన సమర్పించండి",
       "responseSubmitted": "స్పందన సమర్పించబడింది — దశ మళ్లీ సక్రియమైంది.",
-      "documentsPlaceholder": "పత్ర నిర్వహణ తర్వాతి దశలో వస్తుంది.",
+      "documentsPlaceholder": "ఇంకా పత్రాలు అప్‌లోడ్ చేయలేదు.",
       "evcPlaceholder": "EVC షెడ్యూలింగ్ వివరాలు తర్వాతి దశలో వస్తాయి.",
-      "communicationsPlaceholder": "సమాచార మార్పిడి చరిత్ర తర్వాతి దశలో వస్తుంది."
+      "communicationsPlaceholder": "సమాచార మార్పిడి చరిత్ర తర్వాతి దశలో వస్తుంది.",
+      "documentConfidence": "AI వెలికితీత నమ్మకం: {confidence}%",
+      "viewDocument": "చూడండి",
+      "aiPreScrutiny": "AI ముందస్తు పరిశీలన"
     }
   },
   "deficiency": {
@@ -247,7 +255,8 @@
       "CLEAR": "దశను క్లియర్ చేసి ముందుకు పంపండి",
       "RETURN": "లోపం కోసం తిరిగి పంపండి",
       "REFER_SENIOR": "సీనియర్‌కు సూచించండి",
-      "REQUEST_CLARIFICATION": "వివరణ అడగండి"
+      "REQUEST_CLARIFICATION": "వివరణ అడగండి",
+      "AI_ASSISTANT": "AI సహాయక చాట్"
     },
     "returnModal": {
       "title": "దరఖాస్తును తిరిగి పంపండి",
@@ -279,6 +288,70 @@
       "DEFICIENCY_REQUIRED": "కనీసం ఒక లోపం అవసరం.",
       "STAGE_NOT_ASSIGNED_TO_YOU": "ఈ కేసు మీకు అప్పగించబడలేదు.",
       "STAGE_NOT_ACTIVE": "ఈ దశ ఇప్పుడు సక్రియంగా లేదు."
+    },
+    "aiAssistantComingSoon": "ఇది తర్వాతి దశలో అందుబాటులోకి వస్తుంది"
+  },
+  "caseReview": {
+    "caseFile": {
+      "stages": "దశలు",
+      "keyFacts": "ముఖ్య వాస్తవాలు",
+      "academicYear": "విద్యా సంవత్సరం",
+      "courses": "కోర్సులు",
+      "landArea": "భూమి విస్తీర్ణం (ఎకరాలు)"
+    },
+    "docViewer": {
+      "pageOf": "పేజీ {page} / {total}",
+      "zoomIn": "జూమ్ ఇన్",
+      "zoomOut": "జూమ్ అవుట్",
+      "rotate": "తిప్పండి",
+      "noPreview": "ప్రివ్యూ ఇంకా అందుబాటులో లేదు.",
+      "noDocuments": "ఇంకా పత్రాలు అప్‌లోడ్ చేయలేదు.",
+      "aiOcrVerified": "AI OCR: ధ్రువీకరించబడింది",
+      "compare": "పక్కపక్కనే పోల్చండి"
+    },
+    "extractedFields": {
+      "title": "సంగ్రహించిన ఫీల్డ్‌లు",
+      "verified": "ధ్రువీకరించబడింది",
+      "saveVerification": "ధ్రువీకరణను సేవ్ చేయండి",
+      "saveError": "ధ్రువీకరణను సేవ్ చేయలేకపోయింది. దయచేసి మళ్లీ ప్రయత్నించండి."
     }
+  },
+  "aiCheck": {
+    "preScrutinyConfidence": "AI ముందస్తు పరిశీలన నమ్మకం",
+    "noReport": "AI ముందస్తు పరిశీలన నివేదిక ఇంకా అందుబాటులో లేదు.",
+    "noChecksYet": "ఇంకా పరిశీలనలు జరగలేదు — నివేదికను రూపొందించడానికి పత్రాలను అప్‌లోడ్ చేయండి.",
+    "titles": {
+      "landAreaNorms": "భూమి విస్తీర్ణ నిబంధనలు",
+      "stampDuty": "స్టాంప్ డ్యూటీ పరిశీలన",
+      "documentValidity": "పత్ర చెల్లుబాటు",
+      "infrastructure": "మౌలిక సదుపాయాల ధ్రువీకరణ",
+      "duplicateFaculty": "నకిలీ అధ్యాపక పరిశీలన"
+    },
+    "landAreaNorms": {
+      "result": "{extracted} ఎకరాలు vs అవసరమైన {required} ఎకరాలు",
+      "noData": "భూమి విస్తీర్ణం ఇంకా వెలికితీయబడలేదు."
+    },
+    "stampDuty": {
+      "result": "₹{amount} చెల్లించారు — కనీసం ₹{expectedMin} అవసరం",
+      "noData": "స్టాంప్ డ్యూటీ ఇంకా వెలికితీయబడలేదు."
+    },
+    "documentValidity": {
+      "result": "{expiry} వరకు చెల్లుతుంది (అవసరం {requiredUntil} వరకు)",
+      "noData": "పత్ర చెల్లుబాటు ఇంకా నిర్ధారించబడలేదు."
+    },
+    "infrastructure": {
+      "result": "అవసరమైన పత్రాలలో {completePct}% అప్‌లోడ్ చేయబడ్డాయి",
+      "missing": "లేనివి: {items}"
+    },
+    "duplicateFaculty": {
+      "result": "నకిలీ అధ్యాపక రికార్డులు కనుగొనబడలేదు"
+    }
+  },
+  "documentType": {
+    "leaseDeed": "లీజ్ డీడ్",
+    "buildingPlanApproval": "భవన ప్రణాళిక ఆమోదం",
+    "fireNoc": "ఫైర్ NOC",
+    "affidavit": "అఫిడవిట్",
+    "facultyList": "అధ్యాపక జాబితా"
   }
 }

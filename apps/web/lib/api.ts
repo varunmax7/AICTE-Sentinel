@@ -334,3 +334,141 @@ export function updateDeficiencyLetter(letterId: string, bodyMd: string) {
 export function sendDeficiencyLetter(letterId: string) {
   return api.post<DeficiencyLetterOut>(`/api/v1/deficiency-letters/${letterId}/send`);
 }
+
+// ---------------------------------------------------------------------------
+// Types used by Phase P3 screens (IMPLEMENTATION.md §13.4, §14, §15.3)
+// ---------------------------------------------------------------------------
+
+export interface DocumentTypeOut {
+  code: string;
+  name_key: string;
+  has_expiry: boolean;
+  extraction_schema: string[];
+  min_validity_years: number | null;
+}
+
+export interface DocumentVersionOut {
+  id: string;
+  version: number;
+  mime: string;
+  size: number;
+  sha256: string;
+  source: string;
+  at: string;
+}
+
+export type ExtractionFieldValue = { value: string; confidence: number; page: number; human_verified?: boolean };
+
+export interface ExtractionBox {
+  page: number;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  label: string;
+  status: string;
+}
+
+export interface ExtractionOut {
+  id: string;
+  model_id: string;
+  fields: Record<string, ExtractionFieldValue>;
+  boxes: ExtractionBox[];
+  confidence: number;
+  page_count: number;
+  status: "PENDING" | "DONE" | "FAILED";
+}
+
+export interface DocumentOut {
+  id: string;
+  institution_id: string;
+  application_id: string | null;
+  document_type: string;
+  current_version_id: string | null;
+  expiry_date: string | null;
+  verified_status: "UNVERIFIED" | "VERIFIED" | "REJECTED";
+  verified_by: string | null;
+  verified_at: string | null;
+  versions: DocumentVersionOut[];
+  extraction: ExtractionOut | null;
+  preview_url: string | null;
+  download_url: string;
+}
+
+export interface AiCheckOut {
+  check_key: string;
+  status: "PASS" | "WARN" | "FAIL";
+  message_key: string;
+  params: Record<string, unknown>;
+}
+
+export interface AiReportOut {
+  application_id: string;
+  confidence: number;
+  checks: AiCheckOut[];
+}
+
+function absoluteApiUrl(path: string): string {
+  return `${API_BASE}${path}`;
+}
+
+/** Multipart upload — bypasses `api.post`, which always sets a JSON
+ * Content-Type; the browser must set its own multipart boundary for FormData.
+ */
+async function uploadMultipart<T>(path: string, form: FormData): Promise<T> {
+  const res = await fetch(absoluteApiUrl(path), { method: "POST", credentials: "include", body: form });
+  if (!res.ok) {
+    let code = "HTTP_ERROR";
+    let params: Record<string, unknown> = { status: res.status };
+    try {
+      const body = await res.json();
+      if (body?.error?.code) {
+        code = body.error.code;
+        params = body.error.params ?? {};
+      }
+    } catch {
+      // no JSON body
+    }
+    throw new ApiError(res.status, code, params);
+  }
+  return (await res.json()) as T;
+}
+
+export function listDocumentTypes() {
+  return api.get<DocumentTypeOut[]>("/api/v1/document-types");
+}
+
+export function uploadDocument(args: { applicationId: string; documentType: string; file: File }) {
+  const form = new FormData();
+  form.set("application_id", args.applicationId);
+  form.set("document_type", args.documentType);
+  form.set("file", args.file);
+  return uploadMultipart<DocumentOut>("/api/v1/documents", form);
+}
+
+export function getDocument(id: string) {
+  return api.get<DocumentOut>(`/api/v1/documents/${id}`);
+}
+
+export function getApplicationDocuments(applicationId: string) {
+  return api.get<DocumentOut[]>(`/api/v1/applications/${applicationId}/documents`);
+}
+
+export function verifyDocument(
+  id: string,
+  body: { fields?: Record<string, string>; expiry_date?: string; result?: "VERIFIED" | "REJECTED" }
+) {
+  return api.post<DocumentOut>(`/api/v1/documents/${id}/verify`, body);
+}
+
+export function getAiReport(applicationId: string) {
+  return api.get<AiReportOut>(`/api/v1/applications/${applicationId}/ai-report`);
+}
+
+/** Absolute URL for an `<img>`/download link — these stream bytes, not JSON,
+ * so they're fetched directly by the browser (with its own session cookie)
+ * rather than through the `api` JSON client.
+ */
+export function documentAssetUrl(relativeUrl: string): string {
+  return absoluteApiUrl(relativeUrl);
+}
